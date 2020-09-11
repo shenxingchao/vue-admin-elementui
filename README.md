@@ -2,13 +2,13 @@
 为了简单而生
 还在搭建阶段，慎用
 
-##下载
+## 下载
 npm clone git@github.com:shenxingchao/vue-admin-elementui.git
-##安装
+## 安装
 npm install
-##运行
+## 运行
 npm run serve
-##打包
+## 打包
 npm run build
 
 ## 起步
