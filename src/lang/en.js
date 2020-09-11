@@ -4,8 +4,17 @@ const en = {
     login: 'Login'
   },
   //信息提示类
-  info: {},
+  info: {
+    site_title: 'vue-admin-elementui'
+  },
+  //提示类
+  tips: {
+    input: 'input '
+  },
   //字段类
-  field: {}
+  field: {
+    username: 'username',
+    password: 'password'
+  }
 }
 export default en

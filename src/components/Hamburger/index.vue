@@ -22,7 +22,6 @@ export default {
   },
   methods: {
     toggleClick() {
-      alert(33)
       this.$emit('toggleClick')
     }
   }
