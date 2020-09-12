@@ -7,6 +7,9 @@ const en = {
     close_other: 'Close Other',
     close_all: 'Close All',
     log_out: 'Log Out',
+    open_tags: 'Open Tags',
+    fixed_header: 'Fixed Header',
+    sidebar_logo: 'Sidebar Logo',
   },
   //菜单类
   menu: {
@@ -17,6 +20,7 @@ const en = {
   info: {
     site_title: 'vue-admin-elementui',
     home: 'Home',
+    page_setting: 'Page Setting',
   },
   //提示类
   tips: {

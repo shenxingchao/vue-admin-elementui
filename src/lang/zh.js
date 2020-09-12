@@ -7,6 +7,9 @@ const zh = {
     close_other: '关闭其他',
     close_all: '关闭所有',
     log_out: '退出登录',
+    open_tags: '标签页',
+    fixed_header: '头部固定',
+    sidebar_logo: '侧边栏',
   },
   //菜单类
   menu: {
@@ -17,6 +20,7 @@ const zh = {
   info: {
     site_title: '后台管理系统',
     home: '主页',
+    page_setting: '页面设置',
   },
   //提示类
   tips: {

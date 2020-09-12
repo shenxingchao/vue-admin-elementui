@@ -61,19 +61,23 @@ $theme: #50bf8d;
 
 ### 3.elementui 主题色
 
+##### /src/styles/common.scss
+
+主题颜色定义最好在这里，因为这个文件里定义的变量已经加载为全局的，包括给下面这个文件用
+
 ##### /src/styles/element-variables.scss
 
-所有 elementui 颜色变量配置都在这个文件里
+所有 elementui 颜色变量配置都在这个文件里，这里的颜色可以用 common.scss 导出的颜色
 
 ```scss
 /* 改变主题色变量 */
-$--color-primary: #0ba862;
+$--color-primary: $theme;
 /* 改变 icon 字体路径变量，必需 */
 $--font-path: '~element-ui/lib/theme-chalk/fonts';
 @import '~element-ui/packages/theme-chalk/src/index';
 ```
 
-### 4.mockjs
+### 4.mockjs 模拟接口数据
 
 ##### /src/mock/index.js
 
