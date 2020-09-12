@@ -72,3 +72,10 @@ $--color-primary: #0ba862;
 $--font-path: '~element-ui/lib/theme-chalk/fonts';
 @import '~element-ui/packages/theme-chalk/src/index';
 ```
+
+### 4.mockjs
+
+##### /src/mock/index.js
+
+请求拦截，模拟返回数据
+mockjs 在线编辑器 http://mockjs.com/0.1/editor.html#help

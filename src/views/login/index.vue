@@ -105,9 +105,11 @@ export default {
       })
     },
     changeLang(lang) {
-      this.lang = lang
       localStorage.setItem('lang', lang)
-      this.$i18n.locale = lang
+      //目前先这样刷新，路由里的标题不会随之改变
+      this.$router.go(0)
+      // this.lang = lang
+      // this.$i18n.locale = lang
     }
   }
 }
