@@ -65,3 +65,16 @@ div:focus {
 .app-container {
   padding: 20px;
 }
+
+.app-container {
+  .block {
+    margin-top: 20px;
+  }
+
+  .table-img {
+    max-width: 40px;
+    height: auto;
+    display: block;
+    margin: auto;
+  }
+}

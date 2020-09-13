@@ -28,9 +28,21 @@ const zh = {
   },
   //字段类
   field: {
+    //公共
+    id: '编号',
+    title: '标题',
+    image: '图片',
+    detail: '详情',
+    recommend: '推荐',
+    top: '置顶',
+    status: '状态',
+    addtime: '添加时间',
+    updatetime: '修改时间',
     //用户
     username: '用户名',
     password: '密码',
+    //文章
+    author: '作者',
   },
 }
 export default zh

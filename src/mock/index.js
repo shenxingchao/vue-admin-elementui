@@ -31,37 +31,133 @@
 const Mock = require('mockjs')
 
 //用户登录
-let Login = Mock.mock({
+let login = Mock.mock({
   message: 'success',
   code: 20000,
   data: {
-    token: '@word(32)'
-  }
+    token: '@word(32)',
+  },
 })
-Mock.mock(/User\/Login/, 'post', () => {
-  return Login
+Mock.mock(/User\/login/, 'post', () => {
+  return login
 })
 
 //获取用户信息
-let GetUserInfo = Mock.mock({
+let getUserInfo = Mock.mock({
   message: 'success',
   code: 20000,
   data: {
     username: '@cword(5)',
-    avatar:
-      'https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif'
-  }
+    avatar: 'https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif',
+  },
 })
-Mock.mock(/User\/GetUserInfo/, 'get', () => {
-  return GetUserInfo
+Mock.mock(/User\/getInfo/, 'get', () => {
+  return getUserInfo
 })
 
 //用户退出
-let Logout = Mock.mock({
+let logout = Mock.mock({
   message: 'success',
   code: 20000,
-  data: {}
+  data: {},
 })
-Mock.mock(/User\/Logout/, 'post', () => {
-  return Logout
+Mock.mock(/User\/logout/, 'post', () => {
+  return logout
+})
+
+//单文件上传
+let fileUpload = Mock.mock({
+  message: 'success',
+  code: 20000,
+  data: {
+    imgUrl: 'http://photo.chd.edu.cn/_upload/article/images/34/62/0a931db248ce8ece7b39ce45faea/b9333e53-fb26-4e52-88bb-b2d3ee835e75.jpg',
+  },
+})
+Mock.mock(/Upload\/fileUpload/, 'post', () => {
+  return fileUpload
+})
+
+/**
+ * 获取文章列表
+ */
+let articleLst = Mock.mock({
+  message: 'success',
+  code: 20000,
+  data: {
+    total: 100,
+    'data|10': [{
+      'id|+1': 1,
+      title: '@ctitle(6,50)',
+      image: 'https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif',
+      detail: '@cparagraph()',
+      author: '@cname()',
+      recommend: true,
+      top: true,
+      status: true,
+      addtime: '@datetime("yyyy-MM-dd HH:mm:ss")',
+      updatetime: '@datetime("yyyy-MM-dd HH:mm:ss")',
+    }, ],
+  },
+})
+Mock.mock(/Article\/articleLst/, 'get', () => {
+  return articleLst
+})
+
+/**
+ * 文章删除
+ */
+let articleDelete = Mock.mock({
+  message: 'success',
+  code: 20000,
+  data: {},
+})
+Mock.mock(/Article\/articleDelete/, 'post', () => {
+  return articleDelete
+})
+
+/**
+ * 文章添加
+ */
+let articleAdd = Mock.mock({
+  message: 'success',
+  code: 20000,
+  data: {},
+})
+Mock.mock(/Article\/articleAdd/, 'post', () => {
+  return articleAdd
+})
+
+/**
+ * 获取文章详情
+ */
+let articleDetail = Mock.mock({
+  message: 'success',
+  code: 20000,
+  data: {
+    'id|+1': 1,
+    title: '@ctitle(6,50)',
+    articleImg: 'https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif',
+    detail: '@cparagraph()',
+    author: '@cname()',
+    recommend: true,
+    top: true,
+    status: true,
+    addtime: '@datetime("yyyy-MM-dd HH:mm:ss")',
+    updatetime: '@datetime("yyyy-MM-dd HH:mm:ss")',
+  },
+})
+Mock.mock(/Article\/articleDetail/, 'get', () => {
+  return articleDetail
+})
+
+/**
+ * 文章编辑
+ */
+let articleEdit = Mock.mock({
+  message: 'success',
+  code: 20000,
+  data: {},
+})
+Mock.mock(/Article\/articleEdit/, 'post', () => {
+  return articleEdit
 })

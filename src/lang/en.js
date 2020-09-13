@@ -24,13 +24,25 @@ const en = {
   },
   //提示类
   tips: {
-    input: 'input ',
+    input: 'Input ',
   },
   //字段类
   field: {
+    //公共
+    id: 'ID',
+    title: 'Title',
+    image: 'Image',
+    detail: 'Detail',
+    recommend: 'Recommend',
+    top: 'Top',
+    status: 'Status',
+    addtime: 'Add Time',
+    updatetime: 'Update Time',
     //用户
-    username: 'username',
-    password: 'password',
+    username: 'Username',
+    password: 'Password',
+    //文章
+    author: 'Author',
   },
 }
 export default en
