@@ -3,6 +3,8 @@
 为了简单而生
 还在搭建阶段，慎用
 
+[在线预览](https://shenxingchao.github.io/vue-admin-elementui)
+
 ## 下载
 
 git clone git@github.com:shenxingchao/vue-admin-elementui.git
