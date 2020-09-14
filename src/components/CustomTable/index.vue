@@ -1,8 +1,8 @@
 <template>
   <div>
-    <el-table :id="id" ref="multipleTable" :data="data" border fit size="mini" tooltip-effect="dark" style="width: 100%"
-              @header-dragend="handleHeaderDrag" @row-click="handleRowClick" @selection-change="handleSelectionChange"
-              @row-dblclick="handleRowDblClick">
+    <el-table :id="id" ref="multipleTable" :data="data" :row-key="hanldeRowKey" border fit size="mini"
+              tooltip-effect="dark" style="width: 100%" @header-dragend="handleHeaderDrag" @row-click="handleRowClick"
+              @selection-change="handleSelectionChange" @row-dblclick="handleRowDblClick">
       <!-- 多选框checkbox -->
       <el-table-column v-if="showSelection" type="selection" width="55">
       </el-table-column>
@@ -31,10 +31,12 @@
 </template>
 <script>
 import CustomTag from '@/components/CustomTag'
+import Sortable from 'sortablejs' //拖拽插件
 export default {
   name: 'CustomTable',
   components: {
-    CustomTag
+    CustomTag,
+    Sortable
   },
   props: {
     id: {
@@ -73,11 +75,18 @@ export default {
   },
   mounted() {
     this.getTableColWidth()
+    this.rowDrop()
   },
   methods: {
+    //行key
+    hanldeRowKey(row) {
+      return row.id
+    },
+    //分页
     handleSizeChange(val) {
       this.$emit('handleSizeChange', val)
     },
+    //分页
     handleCurrentChange(val) {
       this.$emit('handleCurrentChange', val)
     },
@@ -122,6 +131,17 @@ export default {
           this.tableHead[i].width = tableWidth[i]
         }
       }
+    },
+    //行拖动交换 触发函数参数为交换记录行的id值
+    rowDrop() {
+      const tbody = document.querySelector('.el-table__body-wrapper tbody')
+      const _this = this
+      Sortable.create(tbody, {
+        onEnd({ newIndex, oldIndex }) {
+          const currRow = _this.data.splice(oldIndex, 1)[0]
+          _this.data.splice(newIndex, 0, currRow)
+        }
+      })
     }
   }
 }
