@@ -1,12 +1,29 @@
 <template>
   <div>
-    <el-table :id="id" ref="multipleTable" :data="data" :row-key="hanldeRowKey" border fit size="mini"
+    <div class="block check-cloumn-container">
+      <el-dropdown>
+        <el-button type="primary" size="mini">
+          筛选<i class="el-icon-arrow-down el-icon--right"></i>
+        </el-button>
+        <el-dropdown-menu slot="dropdown">
+          <el-checkbox v-model="checkAll" class="check-column-item" :indeterminate="isIndeterminate"
+                       @change="handleCheckAllChange">全选
+          </el-checkbox>
+          <el-checkbox-group v-model="checkedColumn" @change="handleCheckedColumnChange">
+            <div v-for="(item,index) in tableHead" :key="index">
+              <el-checkbox class="check-column-item" :label="item.label">{{item.label}}</el-checkbox>
+            </div>
+          </el-checkbox-group>
+        </el-dropdown-menu>
+      </el-dropdown>
+    </div>
+    <el-table :id="id" ref="multipleTable" :data="data" :row-key="hanldeRowKey" border fit size="mini" class="block"
               tooltip-effect="dark" style="width: 100%" @header-dragend="handleHeaderDrag" @row-click="handleRowClick"
               @selection-change="handleSelectionChange" @row-dblclick="handleRowDblClick">
       <!-- 多选框checkbox -->
       <el-table-column v-if="showSelection" type="selection" width="55">
       </el-table-column>
-      <el-table-column v-for="(item,index) in tableHead" :key="index" :width="item.width ? item.width : ''"
+      <el-table-column v-for="(item,index) in tableHeadOptions" :key="index" :width="item.width ? item.width : ''"
                        :align="item.align||'center'" :label="item.label" :prop="item.prop"
                        :sortable="item.sortable ? 'custom' : false" show-overflow-tooltip>
         <template slot-scope="scope">
@@ -70,10 +87,24 @@ export default {
   },
   data() {
     return {
-      selectionList: [] //选中行的id数组 1,2,3,4...
+      tableHeadOptions: {}, //实际显示的tableHead
+      selectionList: [], //选中行的id数组 1,2,3,4...
+      checkAll: true,
+      checkedColumn: [],
+      isIndeterminate: false
+    }
+  },
+  watch: {
+    checkedColumn(val) {
+      this.tableHeadOptions = this.tableHead.filter(i => {
+        return val.indexOf(i.label) >= 0
+      })
     }
   },
   mounted() {
+    this.tableHead.forEach(element => {
+      this.checkedColumn.push(element.label)
+    })
     this.getTableColWidth()
     this.rowDrop()
   },
@@ -116,7 +147,11 @@ export default {
         let applyTable = document.getElementById(table_key)
         let applyTableColgroup = applyTable.getElementsByTagName('colgroup')[0]
         let applyTableCol = applyTableColgroup.getElementsByTagName('col')
-        for (let i = 0; i < applyTableCol.length; i++) {
+        for (
+          let i = this.showSelection ? 1 : 0;
+          i < applyTableCol.length;
+          i++
+        ) {
           applyTableColWidths.push(applyTableCol[i].width)
         }
         localStorage.setItem(table_key, JSON.stringify(applyTableColWidths))
@@ -142,10 +177,34 @@ export default {
           _this.data.splice(newIndex, 0, currRow)
         }
       })
+    },
+    //全选
+    handleCheckAllChange(val) {
+      this.checkedColumn = []
+      if (val) {
+        this.tableHead.forEach(element => {
+          this.checkedColumn.push(element.label)
+        })
+      }
+      this.isIndeterminate = false
+    },
+    //切换筛选
+    handleCheckedColumnChange(value) {
+      let checkedCount = value.length
+      this.checkAll = checkedCount === this.tableHead.length
+      this.isIndeterminate =
+        checkedCount > 0 && checkedCount < this.tableHead.length
     }
   }
 }
 </script>
 
 <style lang="scss" scoped>
+.check-cloumn-container {
+  display: flex;
+  justify-content: flex-end;
+}
+.check-column-item {
+  padding: 4px 8px;
+}
 </style>

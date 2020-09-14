@@ -1,6 +1,6 @@
 <template>
   <div class="app-container">
-    <custom-table id="article-list" :data="List" :table-head="tableHead" :params="params"
+    <custom-table id="article-list" :data="List" :table-head="tableHead" :params="params" :show-selection="true"
                   @handleSizeChange="handleSizeChange" @handleCurrentChange="handleCurrentChange"
                   @handleSelectionChange="handleSelectionChange" @handleRowDblClick="handleRowDblClick"></custom-table>
   </div>
