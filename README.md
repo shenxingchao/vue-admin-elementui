@@ -23,7 +23,7 @@ npm run serve
 
 ## 打包
 
-npm run build
+npm run build:prod
 
 ## 起步
 
