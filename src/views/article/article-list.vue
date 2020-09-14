@@ -1,7 +1,8 @@
 <template>
   <div class="app-container">
     <custom-table id="article-list" :data="List" :table-head="tableHead" :params="params"
-                  @handleSizeChange="handleSizeChange" @handleCurrentChange="handleCurrentChange"></custom-table>
+                  @handleSizeChange="handleSizeChange" @handleCurrentChange="handleCurrentChange"
+                  @handleSelectionChange="handleSelectionChange" @handleRowDblClick="handleRowDblClick"></custom-table>
   </div>
 </template>
 
@@ -16,6 +17,7 @@ export default {
   data() {
     return {
       List: [],
+      selectionIdList: [],
       tableHead: [
         {
           label: this.$i18n.t('field.id'),
@@ -100,15 +102,7 @@ export default {
         })
         .catch(() => {})
     },
-    handleEdit(index, row) {
-      this.$router.push({
-        path: '/article/article-edit',
-        query: {
-          id: row.id
-        }
-      })
-    },
-    handleDelete(index, row) {
+    /*   handleDelete(index, row) {
       articleDelete({ id: row.id })
         .then(res => {
           this.List.splice(index, 1)
@@ -118,7 +112,7 @@ export default {
           })
         })
         .catch(() => {})
-    },
+    }, */
     handleSizeChange(val) {
       this.params.pageSize = val
       this.getArticleLst()
@@ -126,6 +120,17 @@ export default {
     handleCurrentChange(val) {
       this.params.page = val
       this.getArticleLst()
+    },
+    handleSelectionChange(val) {
+      this.selectionIdList = val
+    },
+    handleRowDblClick(val) {
+      this.$router.push({
+        path: '/article/article-edit',
+        query: {
+          id: val
+        }
+      })
     },
     onSubmit() {
       this.params.page = 1
