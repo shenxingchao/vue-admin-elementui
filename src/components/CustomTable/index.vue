@@ -1,11 +1,19 @@
 <template>
   <div>
-    <el-table :data="data" border fit size="mini" tooltip-effect="dark" style="width: 100%">
+    <el-table :id="id" :data="data" border fit size="mini" tooltip-effect="dark" style="width: 100%"
+              @header-dragend="handleHeaderDrag">
       <el-table-column v-for="(item,index) in tableHead" :key="index" :width="item.width ? item.width : ''"
                        :align="item.align||'center'" :label="item.label" :prop="item.prop"
                        :sortable="item.sortable ? 'custom' : false" show-overflow-tooltip>
         <template slot-scope="scope">
+          <!-- 单元格渲染html代码 -->
           <template v-if="item.render"><span v-html="item.render(scope.row)"></span></template>
+          <!-- 渲染动态组件,这里只用到了tag组件,其他组件自行实现 -->
+          <template v-else-if="item.component">
+            <component :is="item.component(scope.row).is" :type="item.component(scope.row).type"
+                       :title="item.component(scope.row).title"></component>
+          </template>
+          <!-- 渲染普通文字 -->
           <template v-else>{{scope.row[item.prop]}}</template>
         </template>
       </el-table-column>
@@ -18,9 +26,17 @@
   </div>
 </template>
 <script>
+import CustomTag from '@/components/CustomTag'
 export default {
   name: 'CustomTable',
+  components: {
+    CustomTag
+  },
   props: {
+    id: {
+      type: String,
+      default: ''
+    },
     tableHead: {
       type: Array,
       default: () => {
@@ -42,12 +58,39 @@ export default {
       default: null
     }
   },
+  mounted() {
+    this.getTableColWidth()
+  },
   methods: {
     handleSizeChange(val) {
       this.$emit('handleSizeChange', val)
     },
     handleCurrentChange(val) {
       this.$emit('handleCurrentChange', val)
+    },
+    //拖动表头 改变宽度 保存到localstorage
+    handleHeaderDrag(newWidth, oldWidth, column, event) {
+      setTimeout(() => {
+        let table_key = this.id
+        let applyTableColWidths = []
+        let applyTable = document.getElementById(table_key)
+        let applyTableColgroup = applyTable.getElementsByTagName('colgroup')[0]
+        let applyTableCol = applyTableColgroup.getElementsByTagName('col')
+        for (let i = 0; i < applyTableCol.length; i++) {
+          applyTableColWidths.push(applyTableCol[i].width)
+        }
+        localStorage.setItem(table_key, JSON.stringify(applyTableColWidths))
+      }, 100)
+    },
+    //获取浏览器缓存的列宽
+    getTableColWidth() {
+      let tableWidth = localStorage.getItem(this.id)
+      if (tableWidth) {
+        tableWidth = JSON.parse(tableWidth)
+        for (let i = 0, length = this.tableHead.length; i < length; i++) {
+          this.tableHead[i].width = tableWidth[i]
+        }
+      }
     }
   }
 }

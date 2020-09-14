@@ -1,7 +1,7 @@
 <template>
   <div class="app-container">
-    <custom-table :data="List" :table-head="tableHead" :params="params" @handleSizeChange="handleSizeChange"
-                  @handleCurrentChange="handleCurrentChange"></custom-table>
+    <custom-table id="article-list" :data="List" :table-head="tableHead" :params="params"
+                  @handleSizeChange="handleSizeChange" @handleCurrentChange="handleCurrentChange"></custom-table>
   </div>
 </template>
 
@@ -41,22 +41,28 @@ export default {
         {
           label: this.$i18n.t('field.recommend'),
           prop: 'recommend',
-          render: row => {
-            return row.status ? '是' : '否'
+          component: row => {
+            return row.recommend
+              ? { is: 'custom-tag', type: 'success', title: '是' }
+              : { is: 'custom-tag', type: 'danger', title: '否' }
           }
         },
         {
           label: this.$i18n.t('field.top'),
           prop: 'top',
-          render: row => {
-            return row.status ? '是' : '否'
+          component: row => {
+            return row.top
+              ? { is: 'custom-tag', type: 'success', title: '是' }
+              : { is: 'custom-tag', type: 'danger', title: '否' }
           }
         },
         {
           label: this.$i18n.t('field.status'),
           prop: 'status',
-          render: row => {
-            return row.status ? '启用' : '禁用'
+          component: row => {
+            return row.status
+              ? { is: 'custom-tag', type: 'success', title: '启用' }
+              : { is: 'custom-tag', type: 'danger', title: '禁用' }
           }
         },
         {

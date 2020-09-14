@@ -35,8 +35,8 @@ let login = Mock.mock({
   message: 'success',
   code: 20000,
   data: {
-    token: '@word(32)',
-  },
+    token: '@word(32)'
+  }
 })
 Mock.mock(/User\/login/, 'post', () => {
   return login
@@ -48,8 +48,9 @@ let getUserInfo = Mock.mock({
   code: 20000,
   data: {
     username: '@cword(5)',
-    avatar: 'https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif',
-  },
+    avatar:
+      'https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif'
+  }
 })
 Mock.mock(/User\/getInfo/, 'get', () => {
   return getUserInfo
@@ -59,7 +60,7 @@ Mock.mock(/User\/getInfo/, 'get', () => {
 let logout = Mock.mock({
   message: 'success',
   code: 20000,
-  data: {},
+  data: {}
 })
 Mock.mock(/User\/logout/, 'post', () => {
   return logout
@@ -70,8 +71,9 @@ let fileUpload = Mock.mock({
   message: 'success',
   code: 20000,
   data: {
-    imgUrl: 'http://photo.chd.edu.cn/_upload/article/images/34/62/0a931db248ce8ece7b39ce45faea/b9333e53-fb26-4e52-88bb-b2d3ee835e75.jpg',
-  },
+    imgUrl:
+      'http://photo.chd.edu.cn/_upload/article/images/34/62/0a931db248ce8ece7b39ce45faea/b9333e53-fb26-4e52-88bb-b2d3ee835e75.jpg'
+  }
 })
 Mock.mock(/Upload\/fileUpload/, 'post', () => {
   return fileUpload
@@ -85,19 +87,22 @@ let articleLst = Mock.mock({
   code: 20000,
   data: {
     total: 100,
-    'data|10': [{
-      'id|+1': 1,
-      title: '@ctitle(6,50)',
-      image: 'https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif',
-      detail: '@cparagraph()',
-      author: '@cname()',
-      recommend: true,
-      top: true,
-      status: true,
-      addtime: '@datetime("yyyy-MM-dd HH:mm:ss")',
-      updatetime: '@datetime("yyyy-MM-dd HH:mm:ss")',
-    }, ],
-  },
+    'data|10': [
+      {
+        'id|+1': 1,
+        title: '@ctitle(6,50)',
+        image:
+          'https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif',
+        detail: '@cparagraph()',
+        author: '@cname()',
+        recommend: true,
+        top: false,
+        status: true,
+        addtime: '@datetime("yyyy-MM-dd HH:mm:ss")',
+        updatetime: '@datetime("yyyy-MM-dd HH:mm:ss")'
+      }
+    ]
+  }
 })
 Mock.mock(/Article\/articleLst/, 'get', () => {
   return articleLst
@@ -109,7 +114,7 @@ Mock.mock(/Article\/articleLst/, 'get', () => {
 let articleDelete = Mock.mock({
   message: 'success',
   code: 20000,
-  data: {},
+  data: {}
 })
 Mock.mock(/Article\/articleDelete/, 'post', () => {
   return articleDelete
@@ -121,7 +126,7 @@ Mock.mock(/Article\/articleDelete/, 'post', () => {
 let articleAdd = Mock.mock({
   message: 'success',
   code: 20000,
-  data: {},
+  data: {}
 })
 Mock.mock(/Article\/articleAdd/, 'post', () => {
   return articleAdd
@@ -136,15 +141,16 @@ let articleDetail = Mock.mock({
   data: {
     'id|+1': 1,
     title: '@ctitle(6,50)',
-    articleImg: 'https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif',
+    articleImg:
+      'https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif',
     detail: '@cparagraph()',
     author: '@cname()',
     recommend: true,
     top: true,
     status: true,
     addtime: '@datetime("yyyy-MM-dd HH:mm:ss")',
-    updatetime: '@datetime("yyyy-MM-dd HH:mm:ss")',
-  },
+    updatetime: '@datetime("yyyy-MM-dd HH:mm:ss")'
+  }
 })
 Mock.mock(/Article\/articleDetail/, 'get', () => {
   return articleDetail
@@ -156,7 +162,7 @@ Mock.mock(/Article\/articleDetail/, 'get', () => {
 let articleEdit = Mock.mock({
   message: 'success',
   code: 20000,
-  data: {},
+  data: {}
 })
 Mock.mock(/Article\/articleEdit/, 'post', () => {
   return articleEdit
