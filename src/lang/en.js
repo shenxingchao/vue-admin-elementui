@@ -10,21 +10,23 @@ const en = {
     open_tags: 'Open Tags',
     fixed_header: 'Fixed Header',
     sidebar_logo: 'Sidebar Logo',
+    filter: 'Filter',
+    check_all: 'Check All'
   },
   //菜单类
   menu: {
     dashboard: 'Dashboard',
-    article_list: 'Article List',
+    article_list: 'Article List'
   },
   //信息提示类
   info: {
     site_title: 'vue-admin-elementui',
     home: 'Home',
-    page_setting: 'Page Setting',
+    page_setting: 'Page Setting'
   },
   //提示类
   tips: {
-    input: 'Input ',
+    input: 'Input '
   },
   //字段类
   field: {
@@ -42,7 +44,7 @@ const en = {
     username: 'Username',
     password: 'Password',
     //文章
-    author: 'Author',
-  },
+    author: 'Author'
+  }
 }
 export default en

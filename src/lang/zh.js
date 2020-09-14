@@ -10,21 +10,23 @@ const zh = {
     open_tags: '标签页',
     fixed_header: '头部固定',
     sidebar_logo: '侧边栏',
+    filter: '筛选',
+    check_all: '全选'
   },
   //菜单类
   menu: {
     dashboard: '控制台',
-    article_list: '文章列表',
+    article_list: '文章列表'
   },
   //信息类
   info: {
     site_title: '后台管理系统',
     home: '主页',
-    page_setting: '页面设置',
+    page_setting: '页面设置'
   },
   //提示类
   tips: {
-    input: '请输入',
+    input: '请输入'
   },
   //字段类
   field: {
@@ -42,7 +44,7 @@ const zh = {
     username: '用户名',
     password: '密码',
     //文章
-    author: '作者',
-  },
+    author: '作者'
+  }
 }
 export default zh

@@ -17,9 +17,9 @@
         </el-dropdown-menu>
       </el-dropdown>
     </div>
-    <el-table :id="id" ref="multipleTable" :data="data" :row-key="hanldeRowKey" border fit size="mini" class="block"
-              tooltip-effect="dark" style="width: 100%" @header-dragend="handleHeaderDrag" @row-click="handleRowClick"
-              @selection-change="handleSelectionChange" @row-dblclick="handleRowDblClick">
+    <el-table :id="id" :key="key" ref="multipleTable" :data="data" :row-key="hanldeRowKey" border fit size="mini"
+              class="block" tooltip-effect="dark" style="width: 100%" @header-dragend="handleHeaderDrag"
+              @row-click="handleRowClick" @selection-change="handleSelectionChange" @row-dblclick="handleRowDblClick">
       <!-- 多选框checkbox -->
       <el-table-column v-if="showSelection" type="selection" width="55">
       </el-table-column>
@@ -87,6 +87,7 @@ export default {
   },
   data() {
     return {
+      key: 0, //table的key
       tableHeadOptions: {}, //实际显示的tableHead
       selectionList: [], //选中行的id数组 1,2,3,4...
       checkAll: true,
@@ -99,6 +100,7 @@ export default {
       this.tableHeadOptions = this.tableHead.filter(i => {
         return val.indexOf(i.label) >= 0
       })
+      this.key += 1 //fix 抖动 bug
     }
   },
   mounted() {
