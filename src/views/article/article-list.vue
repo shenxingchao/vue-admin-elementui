@@ -1,15 +1,56 @@
 <template>
   <div class="app-container">
-    <custom-table id="article-list" :data="List" :table-head="tableHead" :params="params" :show-selection="true"
-                  :opt-width="180" @handleSizeChange="handleSizeChange" @handleCurrentChange="handleCurrentChange"
-                  @handleSelectionChange="handleSelectionChange" @handleRowDblClick="handleRowDblClick"
-                  @handleEdit="handleEdit" @handleDelete="handleDelete">
-      <template v-slot:opt="slotProps">
-        <el-button size="mini" icon="el-icon-download" type="warning"
-                   @click.stop="handleDownload(slotProps.scope.$index, slotProps.scope.row)">
-        </el-button>
-      </template>
-    </custom-table>
+    <el-card shadow="hover">
+      <custom-table id="article-list" :data="List" :table-head="tableHead" :params="params" :show-selection="true"
+                    :opt-width="180" @handleSizeChange="handleSizeChange" @handleCurrentChange="handleCurrentChange"
+                    @handleSelectionChange="handleSelectionChange" @handleRowDblClick="handleRowDblClick"
+                    @handleEdit="handleEdit" @handleDelete="handleDelete">
+        <template v-slot:searchBar>
+          <el-form ref="searchForm" :inline="true" :model="params" class="demo-form-inline" size="mini">
+            <el-form-item prop="keyword">
+              <el-input v-model="params.keyword" placeholder="搜索关键词" />
+            </el-form-item>
+            <el-form-item prop="recommend">
+              <el-select v-model="params.recommend" placeholder="推荐">
+                <el-option label="是" :value="true">
+                </el-option>
+                <el-option label="否" :value="false">
+                </el-option>
+              </el-select>
+            </el-form-item>
+            <el-form-item prop="top">
+              <el-select v-model="params.top" placeholder="置顶">
+                <el-option label="是" :value="true">
+                </el-option>
+                <el-option label="否" :value="false">
+                </el-option>
+              </el-select>
+            </el-form-item>
+            <el-form-item prop="status">
+              <el-select v-model="params.status" placeholder="状态">
+                <el-option label="显示" :value="true">
+                </el-option>
+                <el-option label="隐藏" :value="false">
+                </el-option>
+              </el-select>
+            </el-form-item>
+            <el-form-item>
+              <el-button type="primary" icon="el-icon-search" @click.native="onSubmit">查询</el-button>
+              <el-button icon="el-icon-refresh-left" @click.native="$refs['searchForm'].resetFields();onSubmit()">重置
+              </el-button>
+              <el-button type="primary" icon="el-icon-plus" size="mini"
+                         @click.native="$router.push('/article/article-add')">添加
+              </el-button>
+            </el-form-item>
+          </el-form>
+        </template>
+        <template v-slot:opt="slotProps">
+          <el-button size="mini" icon="el-icon-download" type="warning"
+                     @click.stop="handleDownload(slotProps.scope.$index, slotProps.scope.row)">
+          </el-button>
+        </template>
+      </custom-table>
+    </el-card>
   </div>
 </template>
 
@@ -136,7 +177,7 @@ export default {
         .then(res => {
           this.List.splice(index, 1)
           this.$message({
-            message: '删除成功',
+            message: this.$i18n.t('tips.delete_success'),
             type: 'success'
           })
         })
@@ -144,7 +185,7 @@ export default {
     },
     handleDownload(index, row) {
       this.$message({
-        message: '当前下载的id是' + row.id,
+        message: this.$i18n.t('tips.download_info') + row.id,
         type: 'success'
       })
     },

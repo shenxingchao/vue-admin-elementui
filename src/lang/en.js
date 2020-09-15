@@ -18,7 +18,7 @@ const en = {
     dashboard: 'Dashboard',
     article_list: 'Article List'
   },
-  //信息提示类
+  //信息类
   info: {
     site_title: 'vue-admin-elementui',
     home: 'Home',
@@ -26,7 +26,9 @@ const en = {
   },
   //提示类
   tips: {
-    input: 'Input '
+    input: 'Input ',
+    delete_success: 'Delete Success',
+    download_info: 'The current row download ID is '
   },
   //字段类
   field: {

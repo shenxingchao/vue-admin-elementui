@@ -1,8 +1,9 @@
 <template>
   <div>
-    <div v-if="showFilter" class="block check-cloumn-container">
-      <el-dropdown>
-        <el-button type="primary" size="mini">
+    <div v-if="showFilter||showSearch" class="check-cloumn-container">
+      <slot v-if="showSearch" name="searchBar"></slot>
+      <el-dropdown v-if="showFilter" class="filter">
+        <el-button type="danger" size="mini">
           {{$t('opt.filter')}}<i class="el-icon-arrow-down el-icon--right"></i>
         </el-button>
         <el-dropdown-menu slot="dropdown">
@@ -18,8 +19,8 @@
       </el-dropdown>
     </div>
     <el-table :id="id" :key="key" ref="multipleTable" :data="data" :row-key="hanldeRowKey" border fit size="mini"
-              class="block" tooltip-effect="dark" style="width: 100%" @header-dragend="handleHeaderDrag"
-              @row-click="handleRowClick" @selection-change="handleSelectionChange" @row-dblclick="handleRowDblClick">
+              tooltip-effect="dark" style="width: 100%" @header-dragend="handleHeaderDrag" @row-click="handleRowClick"
+              @selection-change="handleSelectionChange" @row-dblclick="handleRowDblClick">
       <!-- 多选框checkbox -->
       <el-table-column v-if="showSelection" type="selection" width="55">
       </el-table-column>
@@ -103,6 +104,11 @@ export default {
     },
     //显示筛选
     showFilter: {
+      type: Boolean,
+      default: true
+    },
+    //显示搜索
+    showSearch: {
       type: Boolean,
       default: true
     },
@@ -247,7 +253,12 @@ export default {
 <style lang="scss" scoped>
 .check-cloumn-container {
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
+  align-items: top;
+  .filter {
+    width: 73px;
+    margin-bottom: 18px;
+  }
 }
 .check-column-item {
   padding: 4px 8px;

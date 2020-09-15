@@ -9,7 +9,7 @@ const zh = {
     log_out: '退出登录',
     open_tags: '标签页',
     fixed_header: '头部固定',
-    sidebar_logo: '侧边栏',
+    sidebar_logo: '侧边栏Logo',
     filter: '筛选',
     check_all: '全选'
   },
@@ -26,7 +26,9 @@ const zh = {
   },
   //提示类
   tips: {
-    input: '请输入'
+    input: '请输入',
+    delete_success: '删除成功',
+    download_info: '当前下载行的id是'
   },
   //字段类
   field: {
