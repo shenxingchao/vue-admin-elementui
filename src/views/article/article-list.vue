@@ -2,7 +2,15 @@
   <div class="app-container">
     <custom-table id="article-list" :data="List" :table-head="tableHead" :params="params" :show-selection="true"
                   @handleSizeChange="handleSizeChange" @handleCurrentChange="handleCurrentChange"
-                  @handleSelectionChange="handleSelectionChange" @handleRowDblClick="handleRowDblClick"></custom-table>
+                  @handleSelectionChange="handleSelectionChange" @handleRowDblClick="handleRowDblClick"
+                  @handleEdit="handleEdit" @handleDelete="handleDelete">
+      <template v-slot:opt="slotProps">
+        <el-button size="mini" icon="el-icon-download" type="warning"
+                   @click.stop="handleDownload(slotProps.scope.$index, slotProps.scope.row)">
+          下载
+        </el-button>
+      </template>
+    </custom-table>
   </div>
 </template>
 
@@ -102,17 +110,6 @@ export default {
         })
         .catch(() => {})
     },
-    /*   handleDelete(index, row) {
-      articleDelete({ id: row.id })
-        .then(res => {
-          this.List.splice(index, 1)
-          this.$message({
-            message: '删除成功',
-            type: 'success'
-          })
-        })
-        .catch(() => {})
-    }, */
     handleSizeChange(val) {
       this.params.pageSize = val
       this.getArticleLst()
@@ -130,6 +127,26 @@ export default {
         query: {
           id: val
         }
+      })
+    },
+    handleEdit(index, row) {
+      this.handleRowDblClick(row.id)
+    },
+    handleDelete(index, row) {
+      articleDelete({ id: row.id })
+        .then(res => {
+          this.List.splice(index, 1)
+          this.$message({
+            message: '删除成功',
+            type: 'success'
+          })
+        })
+        .catch(() => {})
+    },
+    handleDownload(index, row) {
+      this.$message({
+        message: '当前下载的id是' + row.id,
+        type: 'success'
       })
     },
     onSubmit() {

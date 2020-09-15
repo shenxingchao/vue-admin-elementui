@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="block check-cloumn-container">
+    <div v-if="showFilter" class="block check-cloumn-container">
       <el-dropdown>
         <el-button type="primary" size="mini">
           {{$t('opt.filter')}}<i class="el-icon-arrow-down el-icon--right"></i>
@@ -38,6 +38,19 @@
           <template v-else>{{scope.row[item.prop]}}</template>
         </template>
       </el-table-column>
+      <!-- 操作列 -->
+      <el-table-column v-if="showOpt" align="center" label="操作">
+        <template slot-scope="scope">
+          <el-button size="mini" icon="el-icon-edit" type="primary" @click.stop="handleEdit(scope.$index, scope.row)">
+            编辑
+          </el-button>
+          <el-button size="mini" icon="el-icon-delete" type="danger"
+                     @click.stop="handleDelete(scope.$index, scope.row)">删除
+          </el-button>
+          <slot :scope="scope" name="opt">
+          </slot>
+        </template>
+      </el-table-column>
     </el-table>
     <div v-if="showPage" class="block">
       <el-pagination :current-page="params.page" :total="params.total" :page-sizes="params.pageSizes"
@@ -56,33 +69,49 @@ export default {
     Sortable
   },
   props: {
+    //表格id
     id: {
       type: String,
       default: ''
     },
+    //显示单选框
     showSelection: {
       type: Boolean,
       default: true
     },
+    //表头数据
     tableHead: {
       type: Array,
       default: () => {
         return []
       }
     },
+    //表格数据
     data: {
       type: Array,
       default: () => {
         return []
       }
     },
+    //显示分页
     showPage: {
       type: Boolean,
       default: true
     },
+    //分页参数
     params: {
       type: Object,
       default: null
+    },
+    //显示筛选
+    showFilter: {
+      type: Boolean,
+      default: true
+    },
+    //显示操作
+    showOpt: {
+      type: Boolean,
+      default: true
     }
   },
   data() {
@@ -101,6 +130,9 @@ export default {
         return val.indexOf(i.label) >= 0
       })
       this.key += 1 //fix 抖动 bug
+      setTimeout(() => {
+        this.rowDrop() //每次重绘表格在执行拖动
+      }, 100)
     }
   },
   mounted() {
@@ -108,7 +140,6 @@ export default {
       this.checkedColumn.push(element.label)
     })
     this.getTableColWidth()
-    this.rowDrop()
   },
   methods: {
     //行key
@@ -140,6 +171,14 @@ export default {
     handleRowDblClick(val) {
       let id = val.id
       this.$emit('handleRowDblClick', id)
+    },
+    //编辑操作
+    handleEdit(index, row) {
+      this.$emit('handleEdit', index, row)
+    },
+    //删除操作
+    handleDelete(index, row) {
+      this.$emit('handleDelete', index, row)
     },
     //拖动表头 改变宽度 保存到localstorage
     handleHeaderDrag(newWidth, oldWidth, column, event) {
@@ -177,6 +216,7 @@ export default {
         onEnd({ newIndex, oldIndex }) {
           const currRow = _this.data.splice(oldIndex, 1)[0]
           _this.data.splice(newIndex, 0, currRow)
+          _this.$emit('handleRowRrop', _this.data) //当前页新的排序数据
         }
       })
     },
