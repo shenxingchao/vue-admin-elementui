@@ -5,6 +5,8 @@
 
 [在线预览](https://shenxingchao.github.io/vue-admin-elementui)
 
+![预览](https://github.com/shenxingchao/vue-admin-elementui/blob/master/src/assets/preview.png)
+
 ## 下载
 
 git clone git@github.com:shenxingchao/vue-admin-elementui.git
