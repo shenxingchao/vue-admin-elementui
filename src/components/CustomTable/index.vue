@@ -39,14 +39,12 @@
         </template>
       </el-table-column>
       <!-- 操作列 -->
-      <el-table-column v-if="showOpt" align="center" label="操作">
+      <el-table-column v-if="showOpt" align="center" label="操作" :min-width="optWidth">
         <template slot-scope="scope">
           <el-button size="mini" icon="el-icon-edit" type="primary" @click.stop="handleEdit(scope.$index, scope.row)">
-            编辑
           </el-button>
           <el-button size="mini" icon="el-icon-delete" type="danger"
-                     @click.stop="handleDelete(scope.$index, scope.row)">删除
-          </el-button>
+                     @click.stop="handleDelete(scope.$index, scope.row)"></el-button>
           <slot :scope="scope" name="opt">
           </slot>
         </template>
@@ -112,6 +110,11 @@ export default {
     showOpt: {
       type: Boolean,
       default: true
+    },
+    //操作列最小宽度
+    optWidth: {
+      type: Number,
+      default: 120
     }
   },
   data() {

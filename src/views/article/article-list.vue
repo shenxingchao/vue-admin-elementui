@@ -1,13 +1,12 @@
 <template>
   <div class="app-container">
     <custom-table id="article-list" :data="List" :table-head="tableHead" :params="params" :show-selection="true"
-                  @handleSizeChange="handleSizeChange" @handleCurrentChange="handleCurrentChange"
+                  :opt-width="180" @handleSizeChange="handleSizeChange" @handleCurrentChange="handleCurrentChange"
                   @handleSelectionChange="handleSelectionChange" @handleRowDblClick="handleRowDblClick"
                   @handleEdit="handleEdit" @handleDelete="handleDelete">
       <template v-slot:opt="slotProps">
         <el-button size="mini" icon="el-icon-download" type="warning"
                    @click.stop="handleDownload(slotProps.scope.$index, slotProps.scope.row)">
-          下载
         </el-button>
       </template>
     </custom-table>
