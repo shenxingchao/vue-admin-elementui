@@ -196,7 +196,7 @@ export default {
 
 <style lang="scss" scoped>
 .tags-view-container {
-  height: 34px;
+  height: 42px;
   width: 100%;
   background: #fff;
   border-bottom: 1px solid #d8dce5;
@@ -206,15 +206,16 @@ export default {
       display: inline-block;
       position: relative;
       cursor: pointer;
-      height: 26px;
-      line-height: 26px;
+      height: 34px;
+      line-height: 34px;
       border: 1px solid #d8dce5;
       color: #495060;
       background: #fff;
       padding: 0 8px;
       font-size: 12px;
       margin-left: 5px;
-      margin-top: 4px;
+      margin-top: 5px;
+      border-radius: 4px;
       &:first-of-type {
         margin-left: 15px;
       }
@@ -269,18 +270,19 @@ export default {
     .el-icon-close {
       width: 16px;
       height: 16px;
-      vertical-align: 2px;
+      vertical-align: -3px;
       border-radius: 50%;
       text-align: center;
       transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
       transform-origin: 100% 50%;
+      font-size: 16px;
       &:before {
         transform: scale(0.6);
         display: inline-block;
-        vertical-align: -3px;
+        vertical-align: 1px;
       }
       &:hover {
-        background-color: #b4bccc;
+        background-color: $h3c;
         color: #fff;
       }
     }
