@@ -3,7 +3,7 @@
     <div v-if="showFilter||showSearch" class="check-cloumn-container">
       <slot v-if="showSearch" name="searchBar"></slot>
       <el-dropdown v-if="showFilter" class="filter">
-        <el-button type="danger" size="mini">
+        <el-button type="primary" size="mini">
           {{$t('opt.filter')}}<i class="el-icon-arrow-down el-icon--right"></i>
         </el-button>
         <el-dropdown-menu slot="dropdown">

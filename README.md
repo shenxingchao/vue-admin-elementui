@@ -6,7 +6,8 @@
 [在线预览](https://shenxingchao.github.io/vue-admin-elementui)
 
 ![预览](https://github.com/shenxingchao/vue-admin-elementui/raw/master/src/assets/preview.png)
-##### tips:图片无法显示的，添加host 199.232.28.133  raw.githubusercontent.com 即可显示
+
+##### tips:图片无法显示的，添加 host 199.232.28.133 raw.githubusercontent.com 即可显示
 
 ## 下载
 
@@ -88,3 +89,7 @@ $--font-path: '~element-ui/lib/theme-chalk/fonts';
 
 请求拦截，模拟返回数据
 mockjs 在线编辑器 http://mockjs.com/0.1/editor.html#help
+
+### 5.增删改查案例
+
+#### /src/views/article/...vue

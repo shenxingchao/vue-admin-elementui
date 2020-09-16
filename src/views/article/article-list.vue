@@ -41,6 +41,8 @@
               <el-button type="primary" icon="el-icon-plus" size="mini"
                          @click.native="$router.push('/article/article-add')">添加
               </el-button>
+              <el-button type="danger" icon="el-icon-delete" size="mini" @click.native="handleDeleteRows">删除
+              </el-button>
             </el-form-item>
           </el-form>
         </template>
@@ -162,12 +164,13 @@ export default {
       this.selectionIdList = val
     },
     handleRowDblClick(val) {
-      this.$router.push({
-        path: '/article/article-edit',
-        query: {
-          id: val
-        }
-      })
+      this.$message('暂未实现')
+      // this.$router.push({
+      //   path: '/article/article-edit',
+      //   query: {
+      //     id: val
+      //   }
+      // })
     },
     handleEdit(index, row) {
       this.handleRowDblClick(row.id)
@@ -188,6 +191,10 @@ export default {
         message: this.$i18n.t('tips.download_info') + row.id,
         type: 'success'
       })
+    },
+    handleDeleteRows() {
+      this.$message('暂未实现')
+      console.log(this.selectionIdList)
     },
     onSubmit() {
       this.params.page = 1
