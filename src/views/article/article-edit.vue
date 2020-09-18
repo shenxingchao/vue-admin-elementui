@@ -8,7 +8,8 @@
               <el-input v-model="ruleForm.title" :placeholder="$t('field.title')" />
             </el-form-item>
             <el-form-item :label="$t('field.image')" prop="image">
-              <Upload @handleUploadSuccess="handleUploadSuccess($event)" @handleDeleteFile="ruleForm.image = ''">
+              <Upload :file="ruleForm.image" @handleUploadSuccess="handleUploadSuccess($event)"
+                      @handleDeleteFile="ruleForm.image = ''">
               </Upload>
             </el-form-item>
             <el-form-item :label="$t('field.author')" prop="author">
