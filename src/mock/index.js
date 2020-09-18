@@ -141,7 +141,7 @@ let articleDetail = Mock.mock({
   data: {
     'id|+1': 1,
     title: '@ctitle(6,50)',
-    articleImg:
+    image:
       'https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif',
     detail: '@cparagraph()',
     author: '@cname()',
