@@ -11,12 +11,21 @@ const zh = {
     fixed_header: '头部固定',
     sidebar_logo: '侧边栏Logo',
     filter: '筛选',
-    check_all: '全选'
+    check_all: '全选',
+    search: '查询',
+    reset: '重置',
+    add: '添加',
+    delete: '删除',
+    confirm: '确定',
+    save: '保存'
   },
   //菜单类
   menu: {
     dashboard: '控制台',
-    article_list: '文章列表'
+    article: '文章管理',
+    article_list: '文章列表',
+    article_add: '文章添加',
+    article_edit: '文章编辑'
   },
   //信息类
   info: {
@@ -28,7 +37,11 @@ const zh = {
   tips: {
     input: '请输入',
     delete_success: '删除成功',
-    download_info: '当前下载行的id是'
+    download_info: '当前下载行的id是',
+    select_delete: '请选择要删除的数据',
+    upload: '请上传',
+    add_success: '添加成功',
+    edit_success: '编辑成功'
   },
   //字段类
   field: {
@@ -42,6 +55,11 @@ const zh = {
     status: '状态',
     addtime: '添加时间',
     updatetime: '修改时间',
+    keyword: '搜索关键词',
+    yes: '是',
+    no: '否',
+    show: '显示',
+    hide: '隐藏',
     //用户
     username: '用户名',
     password: '密码',

@@ -11,12 +11,21 @@ const en = {
     fixed_header: 'Fixed Header',
     sidebar_logo: 'Sidebar Logo',
     filter: 'Filter',
-    check_all: 'Check All'
+    check_all: 'Check All',
+    search: 'Search',
+    reset: 'Reset',
+    add: 'Add',
+    delete: 'Delete',
+    confirm: 'Confirm',
+    save: 'Save'
   },
   //菜单类
   menu: {
     dashboard: 'Dashboard',
-    article_list: 'Article List'
+    article: 'Article Manage',
+    article_list: 'Article List',
+    article_add: 'Article Add',
+    article_edit: 'Article Edit'
   },
   //信息类
   info: {
@@ -28,7 +37,11 @@ const en = {
   tips: {
     input: 'Input ',
     delete_success: 'Delete Success',
-    download_info: 'The current row download ID is '
+    download_info: 'The current row download ID is ',
+    select_delete: 'Please select the data to be deleted',
+    upload: 'Upload ',
+    add_success: 'Add Success',
+    edit_success: 'Edit Success'
   },
   //字段类
   field: {
@@ -42,6 +55,11 @@ const en = {
     status: 'Status',
     addtime: 'Add Time',
     updatetime: 'Update Time',
+    keyword: 'Keyword',
+    yes: 'Yes',
+    no: 'No',
+    show: 'Show',
+    hide: 'Hide',
     //用户
     username: 'Username',
     password: 'Password',

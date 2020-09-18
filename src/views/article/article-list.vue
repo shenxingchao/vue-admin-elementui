@@ -8,40 +8,42 @@
         <template v-slot:searchBar>
           <el-form ref="searchForm" :inline="true" :model="params" class="demo-form-inline" size="mini">
             <el-form-item prop="keyword">
-              <el-input v-model="params.keyword" placeholder="搜索关键词" />
+              <el-input v-model="params.keyword" :placeholder="$t('field.keyword')" />
             </el-form-item>
             <el-form-item prop="recommend">
-              <el-select v-model="params.recommend" placeholder="推荐">
-                <el-option label="是" :value="true">
+              <el-select v-model="params.recommend" :placeholder="$t('field.recommend')">
+                <el-option :label="$t('field.yes')" :value="true">
                 </el-option>
-                <el-option label="否" :value="false">
+                <el-option :label="$t('field.no')" :value="false">
                 </el-option>
               </el-select>
             </el-form-item>
             <el-form-item prop="top">
-              <el-select v-model="params.top" placeholder="置顶">
-                <el-option label="是" :value="true">
+              <el-select v-model="params.top" :placeholder="$t('field.top')">
+                <el-option :label="$t('field.yes')" :value="true">
                 </el-option>
-                <el-option label="否" :value="false">
+                <el-option :label="$t('field.no')" :value="false">
                 </el-option>
               </el-select>
             </el-form-item>
             <el-form-item prop="status">
-              <el-select v-model="params.status" placeholder="状态">
-                <el-option label="显示" :value="true">
+              <el-select v-model="params.status" :placeholder="$t('field.status')">
+                <el-option :label="$t('field.show')" :value="true">
                 </el-option>
-                <el-option label="隐藏" :value="false">
+                <el-option :label="$t('field.hide')" :value="false">
                 </el-option>
               </el-select>
             </el-form-item>
             <el-form-item>
-              <el-button type="primary" icon="el-icon-search" @click.native="onSubmit">查询</el-button>
-              <el-button icon="el-icon-refresh-left" @click.native="$refs['searchForm'].resetFields();onSubmit()">重置
+              <el-button type="primary" icon="el-icon-search" @click.native="onSubmit">{{$t('opt.search')}}</el-button>
+              <el-button icon="el-icon-refresh-left" @click.native="$refs['searchForm'].resetFields();onSubmit()">
+                {{$t('opt.reset')}}
               </el-button>
               <el-button type="primary" icon="el-icon-plus" size="mini"
-                         @click.native="$router.push('/article/article-add')">添加
+                         @click.native="$router.push('/article/article-add')">{{$t('opt.add')}}
               </el-button>
-              <el-button type="danger" icon="el-icon-delete" size="mini" @click.native="handleDeleteRows">删除
+              <el-button type="danger" icon="el-icon-delete" size="mini" @click.native="handleDeleteRows">
+                {{$t('opt.delete')}}
               </el-button>
             </el-form-item>
           </el-form>
@@ -164,19 +166,18 @@ export default {
       this.selectionIdList = val
     },
     handleRowDblClick(val) {
-      this.$message('暂未实现')
-      // this.$router.push({
-      //   path: '/article/article-edit',
-      //   query: {
-      //     id: val
-      //   }
-      // })
+      this.$router.push({
+        path: '/article/article-edit',
+        query: {
+          id: val
+        }
+      })
     },
     handleEdit(index, row) {
       this.handleRowDblClick(row.id)
     },
     handleDelete(index, row) {
-      articleDelete({ id: row.id })
+      articleDelete({ ids: [row.id] })
         .then(res => {
           this.List.splice(index, 1)
           this.$message({
@@ -193,8 +194,29 @@ export default {
       })
     },
     handleDeleteRows() {
-      this.$message('暂未实现')
-      console.log(this.selectionIdList)
+      let self = this
+      if (this.selectionIdList.length == 0) {
+        this.$message({
+          message: this.$i18n.t('tips.select_delete'),
+          type: 'error'
+        })
+        return false
+      }
+      articleDelete({ ids: this.selectionIdList })
+        .then(res => {
+          //这里删除还可以使用逆向循环删除，删除以后还可以重新获取数据
+          this.List = this.List.filter(
+            item => this.selectionIdList.indexOf(item.id) == -1
+          )
+          this.$message({
+            message: this.$i18n.t('tips.delete_success'),
+            type: 'success',
+            onClose: function() {
+              self.getArticleLst()
+            }
+          })
+        })
+        .catch(() => {})
     },
     onSubmit() {
       this.params.page = 1

@@ -93,3 +93,6 @@ mockjs 在线编辑器 http://mockjs.com/0.1/editor.html#help
 ### 5.增删改查案例
 
 #### /src/views/article/...vue
+
+
+### 后续 1.图片上传组件完善 2.改成可多图上传 3.添加菜单搜索组件 4.添加全部组件 5.修复表格双击时不选中

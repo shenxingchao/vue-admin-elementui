@@ -1,6 +1,7 @@
 'use strict'
 const path = require('path')
 const defaultSettings = require('./src/settings.js')
+const webpack = require('webpack')
 
 function resolve(dir) {
   return path.join(__dirname, dir)
@@ -47,16 +48,22 @@ module.exports = {
     }
   },
   chainWebpack(config) {
-    // it can improve the speed of the first screen, it is recommended to turn on preload
-    config.plugin('preload').tap(() => [
+    //解决 quill-image-resize-module报错问题
+    config.plugin('provide').use(webpack.ProvidePlugin, [
       {
-        rel: 'preload',
-        // to ignore runtime.js
-        // https://github.com/vuejs/vue-cli/blob/dev/packages/@vue/cli-service/lib/config/app.js#L171
-        fileBlacklist: [/\.map$/, /hot-update\.js$/, /runtime\..*\.js$/],
-        include: 'initial'
+        'window.Quill': 'quill'
       }
-    ])
+    ]),
+      // it can improve the speed of the first screen, it is recommended to turn on preload
+      config.plugin('preload').tap(() => [
+        {
+          rel: 'preload',
+          // to ignore runtime.js
+          // https://github.com/vuejs/vue-cli/blob/dev/packages/@vue/cli-service/lib/config/app.js#L171
+          fileBlacklist: [/\.map$/, /hot-update\.js$/, /runtime\..*\.js$/],
+          include: 'initial'
+        }
+      ])
 
     // when there are many pages, it will cause too many meaningless requests
     config.plugins.delete('prefetch')

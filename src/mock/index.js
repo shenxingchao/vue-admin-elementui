@@ -109,7 +109,7 @@ Mock.mock(/Article\/articleLst/, 'get', () => {
 })
 
 /**
- * 文章删除
+ * 文章批量删除
  */
 let articleDelete = Mock.mock({
   message: 'success',

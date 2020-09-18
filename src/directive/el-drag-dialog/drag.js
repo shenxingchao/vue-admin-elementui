@@ -14,7 +14,7 @@ export default {
       }
     })()
 
-    dialogHeaderEl.onmousedown = (e) => {
+    dialogHeaderEl.onmousedown = e => {
       // 鼠标按下，计算当前元素距离可视区的距离
       const disX = e.clientX - dialogHeaderEl.offsetLeft
       const disY = e.clientY - dialogHeaderEl.offsetTop
@@ -36,8 +36,8 @@ export default {
       let styT = getStyle(dragDom, 'top')
 
       if (styL.includes('%')) {
-        styL = +document.body.clientWidth * (+styL.replace(/\%/g, '') / 100)
-        styT = +document.body.clientHeight * (+styT.replace(/\%/g, '') / 100)
+        styL = +document.body.clientWidth * (+styL.replace(/\%/g, '') / 100) // eslint-disable-line
+        styT = +document.body.clientHeight * (+styT.replace(/\%/g, '') / 100) // eslint-disable-line
       } else {
         styL = +styL.replace(/\px/g, '')
         styT = +styT.replace(/\px/g, '')
@@ -49,13 +49,13 @@ export default {
         let top = e.clientY - disY
 
         // 边界处理
-        if (-(left) > minDragDomLeft) {
+        if (-left > minDragDomLeft) {
           left = -minDragDomLeft
         } else if (left > maxDragDomLeft) {
           left = maxDragDomLeft
         }
 
-        if (-(top) > minDragDomTop) {
+        if (-top > minDragDomTop) {
           top = -minDragDomTop
         } else if (top > maxDragDomTop) {
           top = maxDragDomTop
