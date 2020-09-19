@@ -7,8 +7,6 @@
 
 ![预览](http://demo.o8o8o8.com/vue-admin-elementui/preview.png)
 
-##### tips:图片无法显示的，添加 host 199.232.28.133 raw.githubusercontent.com 即可显示
-
 ## 下载
 
 git clone git@github.com:shenxingchao/vue-admin-elementui.git
