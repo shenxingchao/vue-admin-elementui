@@ -5,7 +5,7 @@
 
 [在线预览](https://shenxingchao.github.io/vue-admin-elementui)
 
-![预览](https://github.com/shenxingchao/vue-admin-elementui/raw/master/src/assets/preview.png)
+![预览](http://demo.o8o8o8.com/vue-admin-elementui/preview.png)
 
 ##### tips:图片无法显示的，添加 host 199.232.28.133 raw.githubusercontent.com 即可显示
 
@@ -94,5 +94,4 @@ mockjs 在线编辑器 http://mockjs.com/0.1/editor.html#help
 
 #### /src/views/article/...vue
 
-
-### 后续 0.修复编辑时图片未读取 1.图片上传组件完善 2.改成可多图上传 3.添加菜单搜索组件 4.添加全部组件 5.修复表格双击时不选中
+### 后续 1.图片上传组件完善 2.改成可多图上传 3.添加菜单搜索组件 4.添加全屏组件 5.修复表格双击时不选中 6.模拟后端返回路由表形成动态路由 7.添加可移动弹窗案例
