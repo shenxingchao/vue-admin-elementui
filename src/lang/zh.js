@@ -17,7 +17,9 @@ const zh = {
     add: '添加',
     delete: '删除',
     confirm: '确定',
-    save: '保存'
+    save: '保存',
+    dialog: '弹窗',
+    cancel: '取消',
   },
   //菜单类
   menu: {
@@ -25,13 +27,14 @@ const zh = {
     article: '文章管理',
     article_list: '文章列表',
     article_add: '文章添加',
-    article_edit: '文章编辑'
+    article_edit: '文章编辑',
   },
   //信息类
   info: {
     site_title: '后台管理系统',
     home: '主页',
-    page_setting: '页面设置'
+    page_setting: '页面设置',
+    move_dialog: '这是一个可移动弹窗',
   },
   //提示类
   tips: {
@@ -41,7 +44,7 @@ const zh = {
     select_delete: '请选择要删除的数据',
     upload: '请上传',
     add_success: '添加成功',
-    edit_success: '编辑成功'
+    edit_success: '编辑成功',
   },
   //字段类
   field: {
@@ -64,7 +67,7 @@ const zh = {
     username: '用户名',
     password: '密码',
     //文章
-    author: '作者'
-  }
+    author: '作者',
+  },
 }
 export default zh

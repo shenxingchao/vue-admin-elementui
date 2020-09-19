@@ -12,38 +12,36 @@
             </el-form-item>
             <el-form-item prop="recommend">
               <el-select v-model="params.recommend" :placeholder="$t('field.recommend')">
-                <el-option :label="$t('field.yes')" :value="true">
-                </el-option>
-                <el-option :label="$t('field.no')" :value="false">
-                </el-option>
+                <el-option :label="$t('field.yes')" :value="true"> </el-option>
+                <el-option :label="$t('field.no')" :value="false"> </el-option>
               </el-select>
             </el-form-item>
             <el-form-item prop="top">
               <el-select v-model="params.top" :placeholder="$t('field.top')">
-                <el-option :label="$t('field.yes')" :value="true">
-                </el-option>
-                <el-option :label="$t('field.no')" :value="false">
-                </el-option>
+                <el-option :label="$t('field.yes')" :value="true"> </el-option>
+                <el-option :label="$t('field.no')" :value="false"> </el-option>
               </el-select>
             </el-form-item>
             <el-form-item prop="status">
               <el-select v-model="params.status" :placeholder="$t('field.status')">
-                <el-option :label="$t('field.show')" :value="true">
-                </el-option>
+                <el-option :label="$t('field.show')" :value="true"> </el-option>
                 <el-option :label="$t('field.hide')" :value="false">
                 </el-option>
               </el-select>
             </el-form-item>
             <el-form-item>
-              <el-button type="primary" icon="el-icon-search" @click.native="onSubmit">{{$t('opt.search')}}</el-button>
+              <el-button type="primary" icon="el-icon-search" @click.native="onSubmit">{{ $t('opt.search') }}
+              </el-button>
               <el-button icon="el-icon-refresh-left" @click.native="$refs['searchForm'].resetFields();onSubmit()">
-                {{$t('opt.reset')}}
+                {{ $t('opt.reset') }}
               </el-button>
               <el-button type="primary" icon="el-icon-plus" size="mini"
-                         @click.native="$router.push('/article/article-add')">{{$t('opt.add')}}
+                         @click.native="$router.push('/article/article-add')">{{ $t('opt.add') }}
               </el-button>
               <el-button type="danger" icon="el-icon-delete" size="mini" @click.native="handleDeleteRows">
-                {{$t('opt.delete')}}
+                {{ $t('opt.delete') }}
+              </el-button>
+              <el-button type="warning" icon="el-icon-rank" @click="dialogVisible = true">{{ $t('opt.dialog') }}
               </el-button>
             </el-form-item>
           </el-form>
@@ -55,6 +53,15 @@
         </template>
       </custom-table>
     </el-card>
+    <el-dialog v-el-drag-dialog :title="$t('opt.dialog')" :visible.sync="dialogVisible">
+      <span>{{$t('info.move_dialog')}}</span>
+      <span slot="footer" class="dialog-footer">
+        <el-button @click="dialogVisible = false">{{$t('opt.cancel')}}</el-button>
+        <el-button type="primary" @click="dialogVisible = false">{{
+          $t('opt.confirm')
+        }}</el-button>
+      </span>
+    </el-dialog>
   </div>
 </template>
 
@@ -139,7 +146,8 @@ export default {
         recommend: '',
         top: '',
         status: ''
-      }
+      },
+      dialogVisible: false //可移动弹窗
     }
   },
   async mounted() {
@@ -226,6 +234,5 @@ export default {
   }
 }
 </script>
-  
-<style>
-</style>
+
+<style></style>

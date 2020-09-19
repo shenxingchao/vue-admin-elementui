@@ -23,6 +23,10 @@
   margin: 0 auto;
 }
 
+.el-dialog__wrapper {
+  overflow: hidden !important;
+}
+
 // refine element ui upload
 .upload-container {
   .el-upload {

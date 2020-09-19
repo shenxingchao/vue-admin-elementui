@@ -13,13 +13,15 @@
       "singleQuote": true //用单引号
     }
   },
-  "eslint.validate": [ //eslint检查的语言
+  "eslint.validate": [
+    //eslint检查的语言
     "javascript",
     "html",
-    "vue",
+    "vue"
   ],
   "editor.formatOnSave": true, //保存时自动格式化
-  "editor.codeActionsOnSave": { //保存时eslint自动修复
+  "editor.codeActionsOnSave": {
+    //保存时eslint自动修复
     "source.fixAll.eslint": true
   },
   "prettier.parser": "flow", //prettier格式化不能用时加
