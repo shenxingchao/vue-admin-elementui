@@ -14,7 +14,7 @@ export default {
       }
     })()
 
-    dialogHeaderEl.onmousedown = e => {
+    dialogHeaderEl.onmousedown = (e) => {
       // 鼠标按下，计算当前元素距离可视区的距离
       const disX = e.clientX - dialogHeaderEl.offsetLeft
       const disY = e.clientY - dialogHeaderEl.offsetTop
@@ -73,5 +73,5 @@ export default {
         document.onmouseup = null
       }
     }
-  }
+  },
 }

@@ -11,21 +11,21 @@ Vue.use(VueI18n)
 const messages = {
   en: {
     ...en,
-    ...enLocale
+    ...enLocale,
   },
   zh: {
     ...zh,
-    ...zhLocale
-  }
+    ...zhLocale,
+  },
 }
 // Create VueI18n instance with options
 const i18n = new VueI18n({
   locale: localStorage.lang || 'zh',
-  messages // set locale messages
+  messages, // set locale messages
 })
 
 Vue.use(Element, {
-  i18n: (key, value) => i18n.t(key, value)
+  i18n: (key, value) => i18n.t(key, value),
 })
 
 export default i18n

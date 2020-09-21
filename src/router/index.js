@@ -38,20 +38,20 @@ export const constantRoutes = [
     children: [
       {
         path: '/redirect/:path(.*)',
-        component: () => import('@/views/redirect/index')
-      }
-    ]
+        component: () => import('@/views/redirect/index'),
+      },
+    ],
   },
   {
     path: '/login',
     component: () => import('@/views/login/index'),
-    hidden: true
+    hidden: true,
   },
 
   {
     path: '/404',
     component: () => import('@/views/404'),
-    hidden: true
+    hidden: true,
   },
   {
     path: '/',
@@ -65,10 +65,10 @@ export const constantRoutes = [
         meta: {
           title: i18n.t('menu.dashboard'),
           icon: 'dashboard',
-          affix: true
-        }
-      }
-    ]
+          affix: true,
+        },
+      },
+    ],
   },
   {
     path: '/article',
@@ -79,7 +79,7 @@ export const constantRoutes = [
     hidden: false,
     meta: {
       title: i18n.t('menu.article'),
-      icon: 'table'
+      icon: 'table',
     },
     children: [
       {
@@ -90,8 +90,8 @@ export const constantRoutes = [
         hidden: false,
         meta: {
           title: i18n.t('menu.article_list'),
-          icon: 'table'
-        }
+          icon: 'table',
+        },
       },
       {
         path: 'article-add',
@@ -100,8 +100,8 @@ export const constantRoutes = [
         hidden: true,
         component: () => import('@/views/article/article-add'),
         meta: {
-          title: i18n.t('menu.article_add')
-        }
+          title: i18n.t('menu.article_add'),
+        },
       },
       {
         path: 'article-edit',
@@ -110,13 +110,13 @@ export const constantRoutes = [
         hidden: true,
         component: () => import('@/views/article/article-edit'),
         meta: {
-          title: i18n.t('menu.article_edit')
-        }
-      }
-    ]
+          title: i18n.t('menu.article_edit'),
+        },
+      },
+    ],
   },
   // 404 page must be placed at the end !!!
-  { path: '*', redirect: '/404', hidden: true }
+  { path: '*', redirect: '/404', hidden: true },
 ]
 
 export const asyncRoutes = []
@@ -125,7 +125,7 @@ const createRouter = () =>
   new Router({
     // mode: 'history', // require service support
     scrollBehavior: () => ({ y: 0 }),
-    routes: constantRoutes
+    routes: constantRoutes,
   })
 
 const router = createRouter()
