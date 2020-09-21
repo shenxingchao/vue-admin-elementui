@@ -128,9 +128,9 @@ export default {
       key: 0, //table的key
       tableHeadOptions: {}, //实际显示的tableHead
       selectionList: [], //选中行的id数组 1,2,3,4...
-      checkAll: true,
-      checkedColumn: [],
-      isIndeterminate: false
+      checkAll: true, //全选
+      checkedColumn: [], //字段筛选列表
+      isIndeterminate: false //全选按钮 样式  - 或者是 √
     }
   },
   watch: {
