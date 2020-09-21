@@ -1,7 +1,6 @@
 # vue-admin-elementui
 
 为了简单而生
-还在搭建阶段，慎用
 
 [在线预览](https://shenxingchao.github.io/vue-admin-elementui)
 
