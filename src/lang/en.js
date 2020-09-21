@@ -52,6 +52,7 @@ const en = {
     id: 'ID',
     title: 'Title',
     image: 'Image',
+    image_list: 'Image List',
     detail: 'Detail',
     recommend: 'Recommend',
     top: 'Top',

@@ -11,6 +11,10 @@
               <Upload @handleUploadSuccess="handleUploadSuccess($event)" @handleDeleteFile="ruleForm.image = ''">
               </Upload>
             </el-form-item>
+            <el-form-item :label="$t('field.image_list')" prop="image_list">
+              <Upload multiple @handleUploadMultipleSuccess="handleUploadMultipleSuccess($event)">
+              </Upload>
+            </el-form-item>
             <el-form-item :label="$t('field.author')" prop="author">
               <el-input v-model="ruleForm.author" :placeholder="$t('field.author')" />
             </el-form-item>
@@ -59,6 +63,7 @@ export default {
       ruleForm: {
         title: '',
         image: '',
+        image_list: [],
         author: '',
         type: '',
         detail: '',
@@ -78,6 +83,13 @@ export default {
           {
             required: true,
             message: this.$i18n.t('tips.upload') + this.$i18n.t('field.image')
+          }
+        ],
+        image_list: [
+          {
+            required: true,
+            message:
+              this.$i18n.t('tips.upload') + this.$i18n.t('field.image_list')
           }
         ],
         author: [
@@ -129,6 +141,10 @@ export default {
     handleUploadSuccess: function(imgUrl) {
       this.ruleForm.image = imgUrl
       this.$refs['ruleForm'].clearValidate('image')
+    },
+    handleUploadMultipleSuccess: function(imgUrlList) {
+      this.ruleForm.image_list = imgUrlList
+      this.$refs['ruleForm'].clearValidate('image_list')
     },
     input: function(content) {
       this.ruleForm.detail = content

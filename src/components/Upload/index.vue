@@ -1,16 +1,32 @@
 <template>
   <div class="upload-file-commpent">
-    <div v-if="imgUrl" class="uplaod-file-preview" @mouseenter="isShowOpt = true" @mouseleave="isShowOpt = false">
-      <img :src="imgUrl" alt="上传成功图片" />
-      <div v-show="isShowOpt" class="opt">
-        <i class="el-icon-delete delete-btn" @click="handleClickDelete()"></i>
+    <template v-if="!multiple">
+      <div v-if="imgUrl" class="uplaod-file-preview" @mouseenter="isShowOpt = true" @mouseleave="isShowOpt = false">
+        <img :src="imgUrl" alt="上传成功图片" />
+        <div v-show="isShowOpt" class="opt">
+          <i class="el-icon-delete delete-btn" @click="handleClickDelete()"></i>
+        </div>
       </div>
-    </div>
-    <div v-if="!imgUrl" class="upload-file-btn" @click="$refs.file.click()">
-      <i class="el-icon-plus"></i>
-      <input ref="file" type="file" class="upload-file-input" :accept="fileType"
-             @change="handleUploadFile($event.target.files[0])" />
-    </div>
+      <div v-if="!imgUrl" class="upload-file-btn" @click="$refs.file.click()">
+        <i class="el-icon-plus"></i>
+        <input ref="file" type="file" class="upload-file-input" :accept="fileType"
+               @change="handleUploadFile($event.target.files[0])" />
+      </div>
+    </template>
+    <template v-if="multiple">
+      <div v-for="(item,index) in imgList" :key="index" class="uplaod-file-preview" @mouseenter="isShowOpt = true"
+           @mouseleave="isShowOpt = false">
+        <img :src="item" alt="上传成功图片" />
+        <div v-show="isShowOpt" class="opt">
+          <i class="el-icon-delete delete-btn" @click="handleClickDelete(index)"></i>
+        </div>
+      </div>
+      <div v-if="imgList.length < limit" class="upload-file-btn" @click="$refs.files.click()">
+        <i class="el-icon-plus"></i>
+        <input ref="files" type="file" class="upload-file-input" :accept="fileType" :multiple="multiple"
+               @change="handleUploadFiles($event.target.files)" />
+      </div>
+    </template>
   </div>
 </template>
 <script>
@@ -25,11 +41,20 @@ export default {
     fileType: {
       type: String,
       default: 'image/*'
+    },
+    multiple: {
+      type: Boolean,
+      defalut: false
+    },
+    limit: {
+      type: Number,
+      default: 3
     }
   },
   data() {
     return {
       imgUrl: '',
+      imgList: [],
       isShowOpt: false
     }
   },
@@ -69,6 +94,26 @@ export default {
     handleClickDelete: function() {
       this.imgUrl = ''
       this.$emit('handleDeleteFile')
+    },
+    /**
+     * 多文件上传
+     */
+    handleUploadFiles: function(files) {
+      files.forEach(file => {
+        let fd = new FormData()
+        fd.append('file', file)
+        fileUpload(fd)
+          .then(res => {
+            this.imgList.push(res.data.imgUrl)
+          })
+          .catch(() => {})
+      })
+      this.$message({
+        type: 'success',
+        message: '图片列表上传成功'
+      })
+      //子组件通知父组件上传成功
+      this.$emit('handleUploadMultipleSuccess', this.imgList)
     }
   }
 }

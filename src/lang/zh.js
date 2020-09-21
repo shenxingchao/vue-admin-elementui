@@ -52,6 +52,7 @@ const zh = {
     id: '编号',
     title: '标题',
     image: '图片',
+    image_list: '图片列表',
     detail: '详情',
     recommend: '推荐',
     top: '置顶',
