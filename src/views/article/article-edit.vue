@@ -67,6 +67,7 @@ export default {
         id: this.$route.query.id,
         title: '',
         image: '',
+        image_list: [],
         author: '',
         type: '',
         detail: '',
@@ -86,6 +87,13 @@ export default {
           {
             required: true,
             message: this.$i18n.t('tips.upload') + this.$i18n.t('field.image')
+          }
+        ],
+        image_list: [
+          {
+            required: true,
+            message:
+              this.$i18n.t('tips.upload') + this.$i18n.t('field.image_list')
           }
         ],
         author: [
