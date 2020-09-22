@@ -12,7 +12,8 @@
               </Upload>
             </el-form-item>
             <el-form-item :label="$t('field.image_list')" prop="image_list">
-              <Upload multiple @handleUploadMultipleSuccess="handleUploadMultipleSuccess($event)">
+              <Upload multiple @handleUploadMultipleSuccess="handleUploadMultipleSuccess($event)"
+                      @handleClickDeleteMultiple="ruleForm.image_list = $event">
               </Upload>
             </el-form-item>
             <el-form-item :label="$t('field.author')" prop="author">

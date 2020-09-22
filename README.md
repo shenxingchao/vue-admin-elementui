@@ -87,8 +87,45 @@ $--font-path: '~element-ui/lib/theme-chalk/fonts';
 请求拦截，模拟返回数据
 mockjs 在线编辑器 http://mockjs.com/0.1/editor.html#help
 
-### 5.增删改查案例
+### 5.增删改查demo
 
-#### /src/views/article/...vue
+##### /src/views/article/...vue
 
-### 后续 1.图片上传组件完善 2.改成可多图上传 3.添加菜单搜索组件 5.修复表格双击时不选中 6.模拟后端返回路由表形成动态路由 7.dashborad 页面
+### 6.多图上传组件
+
+
+##### 引入
+```javascript
+import Upload from '@/components/Upload'
+```
+
+##### 
+```html
+<Upload :file="ruleForm.avatar" @handleUploadSuccess="handleUploadSuccess($event)"
+        @handleDeleteFile="ruleForm.avatar = ''">
+</Upload>
+<script>
+//上传成功事件
+handleUploadSuccess: function(imgUrl) {
+    this.ruleForm.avatar = imgUrl
+    //取消头像验证
+    this.$refs['ruleForm'].clearValidate('avatar')
+}
+</script>
+```
+##### 多图上传
+```html
+<Upload :files="ruleForm.image_list" multiple
+        @handleUploadMultipleSuccess="handleUploadMultipleSuccess($event)"
+        @handleClickDeleteMultiple="ruleForm.image_list = $event">
+</Upload>
+<script>
+//多图上传成功事件
+handleUploadMultipleSuccess: function(imgUrlList) {
+  this.ruleForm.image_list = imgUrlList
+  this.$refs['ruleForm'].clearValidate('image_list')
+}
+</script>
+```
+
+### 后续 1.添加菜单搜索组件 2.模拟后端返回路由表形成动态路由 3.dashborad 页面

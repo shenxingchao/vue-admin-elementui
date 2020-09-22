@@ -14,11 +14,11 @@
       </div>
     </template>
     <template v-if="multiple">
-      <div v-for="(item,index) in imgList" :key="index" class="uplaod-file-preview" @mouseenter="isShowOpt = true"
-           @mouseleave="isShowOpt = false">
-        <img :src="item" alt="上传成功图片" />
-        <div v-show="isShowOpt" class="opt">
-          <i class="el-icon-delete delete-btn" @click="handleClickDelete(index)"></i>
+      <div v-for="(item,index) in imgList" :key="index" class="uplaod-file-preview" @mouseenter="item.isShowMask = true"
+           @mouseleave="item.isShowMask = false">
+        <img :src="item.url" alt="上传成功图片" />
+        <div v-show="item.isShowMask" class="opt">
+          <i class="el-icon-delete delete-btn" @click="handleClickDeleteMultiple(index)"></i>
         </div>
       </div>
       <div v-if="imgList.length < limit" class="upload-file-btn" @click="$refs.files.click()">
@@ -49,6 +49,12 @@ export default {
     limit: {
       type: Number,
       default: 3
+    },
+    files: {
+      type: Array,
+      default: function() {
+        return []
+      }
     }
   },
   data() {
@@ -61,13 +67,18 @@ export default {
   watch: {
     file: function(newValue, oldValue) {
       this.imgUrl = newValue
+    },
+    files: function(newValue, oldValue) {
+      this.imgList = []
+      newValue.forEach(url => {
+        this.imgList.push({
+          url: url,
+          isShowMask: false
+        })
+      })
     }
   },
-  mounted() {
-    this.$nextTick(() => {
-      this.imgUrl = this.file
-    })
-  },
+  mounted() {},
   methods: {
     /**
      * 文件上传
@@ -96,33 +107,61 @@ export default {
       this.$emit('handleDeleteFile')
     },
     /**
+     * 多文件删除
+     */
+    handleClickDeleteMultiple: function(index) {
+      this.imgList.splice(index, 1)
+      let urlList = [...this.imgList].map(item => item.url)
+      this.$emit('handleClickDeleteMultiple', urlList)
+    },
+    /**
      * 多文件上传
      */
-    handleUploadFiles: function(files) {
-      files.forEach(file => {
-        let fd = new FormData()
-        fd.append('file', file)
-        fileUpload(fd)
-          .then(res => {
-            this.imgList.push(res.data.imgUrl)
-          })
-          .catch(() => {})
+    handleUploadFiles(files) {
+      if (files.length + this.imgUrl.length > this.limit) {
+        this.$message({
+          type: 'error',
+          message: '最多可上传' + this.limit + '张'
+        })
+        return false
+      }
+      new Promise(resolve => {
+        files.forEach(async (file, index) => {
+          let fd = new FormData()
+          fd.append('file', file)
+          await fileUpload(fd)
+            .then(res => {
+              this.imgList.push({
+                url: res.data.imgUrl,
+                isShowMask: false
+              })
+              if (index == files.length - 1) {
+                resolve()
+              }
+            })
+            .catch(() => {})
+        })
+      }).then(() => {
+        this.$message({
+          type: 'success',
+          message: '图片列表上传成功'
+        })
+        let urlList = [...this.imgList].map(item => item.url) //JSON.parse(JSON.stringify(this.imgList))
+        //子组件通知父组件上传成功
+        this.$emit('handleUploadMultipleSuccess', urlList)
       })
-      this.$message({
-        type: 'success',
-        message: '图片列表上传成功'
-      })
-      //子组件通知父组件上传成功
-      this.$emit('handleUploadMultipleSuccess', this.imgList)
     }
   }
 }
 </script>
 <style lang="scss" scoped>
 .upload-file-commpent {
+  display: flex;
   .uplaod-file-preview {
     width: 100px;
     height: 100px;
+    margin-right: 10px;
+    margin-bottom: 10px;
     position: relative;
     img {
       width: 100%;
@@ -188,5 +227,17 @@ handleUploadSuccess: function(imgUrl) {
     this.ruleForm.avatar = imgUrl
     //取消头像验证
     this.$refs['ruleForm'].clearValidate('avatar')
+}
+
+多图上传
+<Upload :files="ruleForm.image_list" multiple
+        @handleUploadMultipleSuccess="handleUploadMultipleSuccess($event)"
+        @handleClickDeleteMultiple="ruleForm.image_list = $event">
+</Upload>
+      
+//多图上传成功事件
+handleUploadMultipleSuccess: function(imgUrlList) {
+  this.ruleForm.image_list = imgUrlList
+  this.$refs['ruleForm'].clearValidate('image_list')
 }
 */
