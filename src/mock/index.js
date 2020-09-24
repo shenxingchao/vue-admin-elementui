@@ -72,16 +72,14 @@ let fileUpload = Mock.mock({
   code: 20000,
   data: {
     imgUrl:
-      'http://photo.chd.edu.cn/_upload/article/images/34/62/0a931db248ce8ece7b39ce45faea/b9333e53-fb26-4e52-88bb-b2d3ee835e75.jpg'
+      'https://iph.href.lu/400x300?text=%E4%B8%8A%E4%BC%A0%E8%BF%94%E5%9B%9E%E7%9A%84%E5%9B%BE%E7%89%87&fg=ffffff&bg=2986cc'
   }
 })
 Mock.mock(/Upload\/fileUpload/, 'post', () => {
   return fileUpload
 })
 
-/**
- * 获取文章列表
- */
+//获取文章列表
 let articleLst = Mock.mock({
   message: 'success',
   code: 20000,
@@ -108,9 +106,7 @@ Mock.mock(/Article\/articleLst/, 'get', () => {
   return articleLst
 })
 
-/**
- * 文章批量删除
- */
+//文章批量删除
 let articleDelete = Mock.mock({
   message: 'success',
   code: 20000,
@@ -120,9 +116,7 @@ Mock.mock(/Article\/articleDelete/, 'post', () => {
   return articleDelete
 })
 
-/**
- * 文章添加
- */
+//文章添加
 let articleAdd = Mock.mock({
   message: 'success',
   code: 20000,
@@ -132,9 +126,7 @@ Mock.mock(/Article\/articleAdd/, 'post', () => {
   return articleAdd
 })
 
-/**
- * 获取文章详情
- */
+//获取文章详情
 let articleDetail = Mock.mock({
   message: 'success',
   code: 20000,
@@ -161,9 +153,7 @@ Mock.mock(/Article\/articleDetail/, 'get', () => {
   return articleDetail
 })
 
-/**
- * 文章编辑
- */
+//文章编辑
 let articleEdit = Mock.mock({
   message: 'success',
   code: 20000,

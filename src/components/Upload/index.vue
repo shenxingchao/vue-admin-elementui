@@ -118,7 +118,7 @@ export default {
      * 多文件上传
      */
     handleUploadFiles(files) {
-      if (files.length + this.imgUrl.length > this.limit) {
+      if (files.length + this.imgList.length > this.limit) {
         this.$message({
           type: 'error',
           message: '最多可上传' + this.limit + '张'
