@@ -157,6 +157,7 @@ export default {
 <style lang="scss" scoped>
 .upload-file-commpent {
   display: flex;
+  flex-wrap: wrap;
   .uplaod-file-preview {
     width: 100px;
     height: 100px;
