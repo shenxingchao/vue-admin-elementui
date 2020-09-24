@@ -7,7 +7,7 @@ import { getToken } from '@/utils/auth' // get token from cookie
 import getPageTitle from '@/utils/get-page-title'
 
 NProgress.configure({
-  showSpinner: false,
+  showSpinner: false
 }) // NProgress Configuration
 
 const whiteList = ['/login'] // no redirect whitelist
@@ -26,7 +26,7 @@ router.beforeEach(async (to, from, next) => {
     if (to.path === '/login') {
       // if is logged in, redirect to the home page
       next({
-        path: '/',
+        path: '/'
       })
       NProgress.done()
     } else {
@@ -37,7 +37,10 @@ router.beforeEach(async (to, from, next) => {
         try {
           // get user info
           await store.dispatch('user/getInfo')
-
+          // generate accessible routes map based on roles
+          const accessRoutes = await store.dispatch('permission/generateRoutes')
+          // dynamically add accessible routes
+          router.addRoutes(accessRoutes)
           next()
         } catch (error) {
           // remove token and go to login page to re-login

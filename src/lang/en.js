@@ -19,7 +19,7 @@ const en = {
     confirm: 'Confirm',
     save: 'Save',
     dialog: 'Dialog',
-    cancel: 'Cancel',
+    cancel: 'Cancel'
   },
   //菜单类
   menu: {
@@ -27,14 +27,14 @@ const en = {
     article: 'Article Manage',
     article_list: 'Article List',
     article_add: 'Article Add',
-    article_edit: 'Article Edit',
+    article_edit: 'Article Edit'
   },
   //信息类
   info: {
     site_title: 'vue-admin-elementui',
     home: 'Home',
     page_setting: 'Page Setting',
-    move_dialog: 'This is a dialog can move',
+    move_dialog: 'This is a dialog can move'
   },
   //提示类
   tips: {
@@ -44,7 +44,7 @@ const en = {
     select_delete: 'Please select the data to be deleted',
     upload: 'Upload ',
     add_success: 'Add Success',
-    edit_success: 'Edit Success',
+    edit_success: 'Edit Success'
   },
   //字段类
   field: {
@@ -68,7 +68,7 @@ const en = {
     username: 'Username',
     password: 'Password',
     //文章
-    author: 'Author',
-  },
+    author: 'Author'
+  }
 }
 export default en
