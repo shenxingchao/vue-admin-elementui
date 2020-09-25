@@ -49,10 +49,11 @@ let getUserInfo = Mock.mock({
   data: {
     username: '@cword(5)',
     avatar:
-      'https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif'
+      'https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif',
+    roles: [1, 2, 3] //模拟返回角色id 1，2，3
   }
 })
-Mock.mock(/User\/getInfo/, 'get', () => {
+Mock.mock(/UserCenter\/getInfo/, 'get', () => {
   return getUserInfo
 })
 
@@ -62,8 +63,82 @@ let logout = Mock.mock({
   code: 20000,
   data: {}
 })
-Mock.mock(/User\/logout/, 'post', () => {
+Mock.mock(/UserCenter\/logout/, 'post', () => {
   return logout
+})
+
+//根据用户角色获取权限
+let getPermissionRouter = Mock.mock({
+  message: 'success',
+  code: 20000,
+  data: [
+    {
+      path: '/',
+      component: 'Layout',
+      redirect: '/dashboard',
+      children: [
+        {
+          path: 'dashboard',
+          name: 'Dashboard',
+          component: 'Dashboard',
+          meta: {
+            title: '控制台',
+            icon: 'dashboard',
+            affix: true
+          }
+        }
+      ]
+    },
+    {
+      path: '/article',
+      name: 'Article',
+      component: 'Layout',
+      redirect: '/article/article-list',
+      // redirect: 'noRedirect',
+      alwaysShow: true,
+      hidden: false,
+      meta: {
+        title: '文章管理',
+        icon: 'table'
+      },
+      children: [
+        {
+          path: 'article-list',
+          name: 'ArticleList',
+          component: 'ArticleList',
+          alwaysShow: false,
+          hidden: false,
+          meta: {
+            title: '文章列表',
+            icon: 'table'
+          }
+        },
+        {
+          path: 'article-add',
+          name: 'ArticleAdd',
+          alwaysShow: false,
+          hidden: true,
+          component: 'ArticleAdd',
+          meta: {
+            title: '文章添加'
+          }
+        },
+        {
+          path: 'article-edit',
+          name: 'ArticleEdit',
+          alwaysShow: false,
+          hidden: true,
+          component: 'ArticleEdit',
+          meta: {
+            title: '文章编辑'
+          }
+        }
+      ]
+    }
+  ]
+})
+Mock.mock(/UserCenter\/getPermissionRouter/, 'post', () => {
+  return getPermissionRouter
 })
 
 //单文件上传

@@ -31,6 +31,11 @@ import Layout from '@/layout'
  */
 export const constantRoutes = [
   {
+    path: '/login',
+    component: () => import('@/views/login/index'),
+    hidden: true
+  },
+  {
     path: '/redirect',
     component: Layout,
     hidden: true,
@@ -42,84 +47,11 @@ export const constantRoutes = [
     ]
   },
   {
-    path: '/login',
-    component: () => import('@/views/login/index'),
-    hidden: true
-  },
-
-  {
     path: '/404',
     component: () => import('@/views/404'),
     hidden: true
-  },
-  {
-    path: '/',
-    component: Layout,
-    redirect: '/dashboard',
-    children: [
-      {
-        path: 'dashboard',
-        name: 'Dashboard',
-        component: () => import('@/views/dashboard/index'),
-        meta: {
-          title: '控制台',
-          icon: 'dashboard',
-          affix: true
-        }
-      }
-    ]
-  },
-  {
-    path: '/article',
-    name: 'Article',
-    component: Layout,
-    redirect: '/article/article-list',
-    // redirect: 'noRedirect',
-    alwaysShow: true,
-    hidden: false,
-    meta: {
-      title: '文章管理',
-      icon: 'table'
-    },
-    children: [
-      {
-        path: 'article-list',
-        name: 'ArticleList',
-        component: () => import('@/views/article/article-list'),
-        alwaysShow: false,
-        hidden: false,
-        meta: {
-          title: '文章列表',
-          icon: 'table'
-        }
-      },
-      {
-        path: 'article-add',
-        name: 'ArticleAdd',
-        alwaysShow: false,
-        hidden: true,
-        component: () => import('@/views/article/article-add'),
-        meta: {
-          title: '文章添加'
-        }
-      },
-      {
-        path: 'article-edit',
-        name: 'ArticleEdit',
-        alwaysShow: false,
-        hidden: true,
-        component: () => import('@/views/article/article-edit'),
-        meta: {
-          title: '文章编辑'
-        }
-      }
-    ]
-  },
-  // 404 page must be placed at the end !!!
-  { path: '*', redirect: '/404', hidden: true }
+  }
 ]
-
-export const asyncRoutes = []
 
 const createRouter = () =>
   new Router({

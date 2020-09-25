@@ -24,24 +24,28 @@ router.beforeEach(async (to, from, next) => {
 
   if (hasToken) {
     if (to.path === '/login') {
-      // if is logged in, redirect to the home page
+      //如果已经登录，则跳转到首页
       next({
         path: '/'
       })
       NProgress.done()
     } else {
-      const hasGetUserInfo = store.getters.name
-      if (hasGetUserInfo) {
+      //路由权限验证开始
+      const hasRoles = store.getters.roles && store.getters.roles.length > 0 //vuex是否有角色状态
+      if (hasRoles) {
         next()
       } else {
         try {
-          // get user info
-          await store.dispatch('user/getInfo')
-          // generate accessible routes map based on roles
-          const accessRoutes = await store.dispatch('permission/generateRoutes')
-          // dynamically add accessible routes
-          router.addRoutes(accessRoutes)
-          next()
+          const { roles } = await store.dispatch('user/getInfo') //此处获取角色id数组
+
+          const asyncRouterMapRes = await store.dispatch(
+            'permission/generateRoutes',
+            roles
+          ) //根据角色id数组 创建动态路由
+          router.options.routes = store.getters.addRoutes // bug 新增的路由添加到路由配置 不然菜单会不显示 看菜单组件用的是这个 router.options.routes
+          router.addRoutes(asyncRouterMapRes) //异步动态映射路由添加到当前路由
+
+          next({ ...to, replace: true }) //确保addRoutes已完成
         } catch (error) {
           // remove token and go to login page to re-login
           await store.dispatch('user/resetToken')

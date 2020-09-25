@@ -4,22 +4,32 @@ export function login(ruleForm) {
   return request({
     url: '/User/login',
     method: 'post',
-    data: ruleForm,
+    data: ruleForm
   })
 }
 
+//分割线，下面这些接口是已经登录后请求的
+
 export function getInfo(params) {
   return request({
-    url: '/User/getInfo',
+    url: '/UserCenter/getInfo',
     method: 'get',
-    params: params,
+    params: params
   })
 }
 
 export function logout(ruleForm) {
   return request({
-    url: '/User/logout',
+    url: '/UserCenter/logout',
     method: 'post',
-    data: ruleForm,
+    data: ruleForm
+  })
+}
+
+export function getPermissionRouter(params) {
+  return request({
+    url: '/UserCenter/getPermissionRouter',
+    method: 'post',
+    params: params
   })
 }

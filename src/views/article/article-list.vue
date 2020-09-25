@@ -48,7 +48,7 @@
         </template>
       </custom-table>
     </el-card>
-    <el-dialog v-el-drag-dialog :title="弹窗" :visible.sync="dialogVisible">
+    <el-dialog v-el-drag-dialog title="弹窗" :visible.sync="dialogVisible">
       <span>这是一个可移动弹窗</span>
       <span slot="footer" class="dialog-footer">
         <el-button @click="dialogVisible = false">取消</el-button>
