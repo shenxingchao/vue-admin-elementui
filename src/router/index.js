@@ -74,8 +74,8 @@ export const constantRoutes = [
     path: '/article',
     name: 'Article',
     component: Layout,
-    // redirect: '/article/article-list',
-    redirect: 'noRedirect',
+    redirect: '/article/article-list',
+    // redirect: 'noRedirect',
     alwaysShow: true,
     hidden: false,
     meta: {

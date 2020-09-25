@@ -2,9 +2,10 @@
   <div :class="{'show':show}" class="header-search">
     <svg-icon class-name="search-icon" icon-class="search" @click.stop="click" />
     <el-select ref="headerSearchSelect" v-model="search" :remote-method="querySearch" filterable default-first-option
-               remote :placeholder="$t('opt.search')" class="header-search-select" @change="change">
-      <el-option v-for="item in options" :key="item.path" :value="item" :label="item.title.join(' > ')" />
-      <!-- fix bug if item.title.length = 1 -->
+               remote placeholder="Search" class="header-search-select" @change="change">
+      <el-option v-for="item in options" :key="item.item.path" :value="item.item"
+                 :label="item.item.title.join(' > ')" />
+      <!-- fix bug fuse output  res in item keys see https://fusejs.io/examples.html#search-string-array outout tab -->
     </el-select>
   </div>
 </template>
@@ -75,12 +76,12 @@ export default {
         threshold: 0.4,
         location: 0,
         distance: 100,
-        maxPatternLength: 32,
+        // maxPatternLength: 32,//fuse.js v6.4.1无此属性
         minMatchCharLength: 1,
         keys: [
           {
             name: 'title',
-            weight: 0.7
+            weight: 0.7 //类似于权重
           },
           {
             name: 'path',
@@ -132,7 +133,6 @@ export default {
     querySearch(query) {
       if (query !== '') {
         this.options = this.fuse.search(query)
-        console.log(this.options)
       } else {
         this.options = []
       }
