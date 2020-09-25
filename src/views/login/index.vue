@@ -3,34 +3,27 @@
     <el-form ref="loginForm" :model="loginForm" :rules="loginRules" class="login-form" auto-complete="on"
              label-position="left">
       <div class="title-container">
-        <h3 class="title">{{$t('info.site_title')}}</h3>
+        <h3 class="title">后台管理系统</h3>
       </div>
       <el-form-item prop="username">
         <span class="svg-container">
           <svg-icon icon-class="user" />
         </span>
-        <el-input ref="username" v-model="loginForm.username" :placeholder="$t('field.username')" name="username"
-                  type="text" tabindex="1" auto-complete="on" />
+        <el-input ref="username" v-model="loginForm.username" placeholder="用户名" name="username" type="text" tabindex="1"
+                  auto-complete="on" />
       </el-form-item>
-
       <el-form-item prop="password">
         <span class="svg-container">
           <svg-icon icon-class="password" />
         </span>
-        <el-input :key="passwordType" ref="password" v-model="loginForm.password" :type="passwordType"
-                  :placeholder="$t('field.password')" name="password" tabindex="2" auto-complete="on"
-                  @keyup.enter.native="handleLogin" />
+        <el-input :key="passwordType" ref="password" v-model="loginForm.password" :type="passwordType" placeholder="密码"
+                  name="password" tabindex="2" auto-complete="on" @keyup.enter.native="handleLogin" />
         <span class="show-pwd" @click="showPwd">
           <svg-icon :icon-class="passwordType === 'password' ? 'eye' : 'eye-open'" />
         </span>
       </el-form-item>
-      <div class="lang-change">
-        <el-radio v-model="lang" label="zh" @click.native="changeLang('zh')">中文</el-radio>
-        <el-radio v-model="lang" label="en" @click.native="changeLang('en')">English
-        </el-radio>
-      </div>
       <el-button :loading="loading" type="primary" style="width:100%;margin-bottom:30px;"
-                 @click.native.prevent="handleLogin">{{$t('opt.login')}}</el-button>
+                 @click.native.prevent="handleLogin">登录</el-button>
     </el-form>
   </div>
 </template> 
@@ -49,21 +42,20 @@ export default {
           {
             required: true,
             trigger: 'blur',
-            message: this.$i18n.t('tips.input') + this.$i18n.t('field.username')
+            message: '请输入用户名'
           }
         ],
         password: [
           {
             required: true,
             trigger: 'blur',
-            message: this.$i18n.t('tips.input') + this.$i18n.t('field.password')
+            message: '请输入密码'
           }
         ]
       },
       loading: false,
       passwordType: 'password',
-      redirect: undefined,
-      lang: localStorage.lang || 'zh'
+      redirect: undefined
     }
   },
   watch: {
@@ -103,13 +95,6 @@ export default {
           return false
         }
       })
-    },
-    changeLang(lang) {
-      localStorage.setItem('lang', lang)
-      //目前先这样刷新，路由里的标题不会随之改变
-      this.$router.go(0)
-      // this.lang = lang
-      // this.$i18n.locale = lang
     }
   }
 }
@@ -229,10 +214,6 @@ $dark_gray: #889aa4;
     color: $dark_gray;
     cursor: pointer;
     user-select: none;
-  }
-
-  .lang-change {
-    margin-bottom: 20px;
   }
 }
 </style>

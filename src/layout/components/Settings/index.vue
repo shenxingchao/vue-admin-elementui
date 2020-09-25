@@ -1,20 +1,20 @@
 <template>
   <div class="drawer-container">
     <div>
-      <h3 class="drawer-title">{{$t('info.page_setting')}}</h3>
+      <h3 class="drawer-title">页面设置</h3>
 
       <div class="drawer-item">
-        <span>{{$t('opt.open_tags')}}</span>
+        <span>标签页</span>
         <el-switch v-model="tagsView" class="drawer-switch" />
       </div>
 
       <div class="drawer-item">
-        <span>{{$t('opt.fixed_header')}}</span>
+        <span>头部固定</span>
         <el-switch v-model="fixedHeader" class="drawer-switch" />
       </div>
 
       <div class="drawer-item">
-        <span>{{$t('opt.sidebar_logo')}}</span>
+        <span>侧边栏Logo</span>
         <el-switch v-model="sidebarLogo" class="drawer-switch" />
       </div>
 

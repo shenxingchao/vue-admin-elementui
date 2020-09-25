@@ -16,15 +16,13 @@
         </div>
         <el-dropdown-menu slot="dropdown" class="user-dropdown">
           <router-link to="/">
-            <el-dropdown-item>
-              {{$t('info.home')}}
-            </el-dropdown-item>
+            <el-dropdown-item>主页</el-dropdown-item>
           </router-link>
           <a target="_blank" href="https://github.com/shenxingchao/vue-admin-elementui">
             <el-dropdown-item>Github</el-dropdown-item>
           </a>
           <el-dropdown-item divided @click.native="logout">
-            <span style="display:block;">{{$t('opt.log_out')}}</span>
+            <span style="display:block;">退出登录</span>
           </el-dropdown-item>
         </el-dropdown-menu>
       </el-dropdown>

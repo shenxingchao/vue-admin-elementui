@@ -1,6 +1,6 @@
 <template>
   <div class="dashboard-container">
-    {{$t('menu.dashboard')}}
+    控制台
   </div>
 </template>
 

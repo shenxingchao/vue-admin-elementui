@@ -8,41 +8,36 @@
         <template v-slot:searchBar>
           <el-form ref="searchForm" :inline="true" :model="params" class="demo-form-inline" size="mini">
             <el-form-item prop="keyword">
-              <el-input v-model="params.keyword" :placeholder="$t('field.keyword')" />
+              <el-input v-model="params.keyword" placeholder="搜索关键词" />
             </el-form-item>
             <el-form-item prop="recommend">
-              <el-select v-model="params.recommend" :placeholder="$t('field.recommend')">
-                <el-option :label="$t('field.yes')" :value="true"> </el-option>
-                <el-option :label="$t('field.no')" :value="false"> </el-option>
+              <el-select v-model="params.recommend" placeholder="推荐">
+                <el-option label="是" :value="true"> </el-option>
+                <el-option label="否" :value="false"> </el-option>
               </el-select>
             </el-form-item>
             <el-form-item prop="top">
-              <el-select v-model="params.top" :placeholder="$t('field.top')">
-                <el-option :label="$t('field.yes')" :value="true"> </el-option>
-                <el-option :label="$t('field.no')" :value="false"> </el-option>
+              <el-select v-model="params.top" placeholder="置顶">
+                <el-option label="是" :value="true"> </el-option>
+                <el-option label="否" :value="false"> </el-option>
               </el-select>
             </el-form-item>
             <el-form-item prop="status">
-              <el-select v-model="params.status" :placeholder="$t('field.status')">
-                <el-option :label="$t('field.show')" :value="true"> </el-option>
-                <el-option :label="$t('field.hide')" :value="false">
+              <el-select v-model="params.status" placeholder="状态">
+                <el-option label="显示" :value="true"> </el-option>
+                <el-option label="隐藏" :value="false">
                 </el-option>
               </el-select>
             </el-form-item>
             <el-form-item>
-              <el-button type="primary" icon="el-icon-search" @click.native="onSubmit">{{ $t('opt.search') }}
-              </el-button>
-              <el-button icon="el-icon-refresh-left" @click.native="$refs['searchForm'].resetFields();onSubmit()">
-                {{ $t('opt.reset') }}
+              <el-button type="primary" icon="el-icon-search" @click.native="onSubmit">查询</el-button>
+              <el-button icon="el-icon-refresh-left" @click.native="$refs['searchForm'].resetFields();onSubmit()">重置
               </el-button>
               <el-button type="primary" icon="el-icon-plus" size="mini"
-                         @click.native="$router.push('/article/article-add')">{{ $t('opt.add') }}
+                         @click.native="$router.push('/article/article-add')">添加
               </el-button>
-              <el-button type="danger" icon="el-icon-delete" size="mini" @click.native="handleDeleteRows">
-                {{ $t('opt.delete') }}
-              </el-button>
-              <el-button type="warning" icon="el-icon-rank" @click="dialogVisible = true">{{ $t('opt.dialog') }}
-              </el-button>
+              <el-button type="danger" icon="el-icon-delete" size="mini" @click.native="handleDeleteRows">删除</el-button>
+              <el-button type="warning" icon="el-icon-rank" @click="dialogVisible = true">这是一个可移动弹窗</el-button>
             </el-form-item>
           </el-form>
         </template>
@@ -53,13 +48,11 @@
         </template>
       </custom-table>
     </el-card>
-    <el-dialog v-el-drag-dialog :title="$t('opt.dialog')" :visible.sync="dialogVisible">
-      <span>{{$t('info.move_dialog')}}</span>
+    <el-dialog v-el-drag-dialog :title="弹窗" :visible.sync="dialogVisible">
+      <span>这是一个可移动弹窗</span>
       <span slot="footer" class="dialog-footer">
-        <el-button @click="dialogVisible = false">{{$t('opt.cancel')}}</el-button>
-        <el-button type="primary" @click="dialogVisible = false">{{
-          $t('opt.confirm')
-        }}</el-button>
+        <el-button @click="dialogVisible = false">取消</el-button>
+        <el-button type="primary" @click="dialogVisible = false">确定</el-button>
       </span>
     </el-dialog>
   </div>
@@ -79,28 +72,28 @@ export default {
       selectionIdList: [],
       tableHead: [
         {
-          label: this.$i18n.t('field.id'),
+          label: '编号',
           prop: 'id',
           width: 60
         },
         {
-          label: this.$i18n.t('field.title'),
+          label: '标题',
           prop: 'title',
           width: 300
         },
         {
-          label: this.$i18n.t('field.image'),
+          label: '图片',
           prop: 'image',
           render: row => {
             return '<img  src="' + row.image + '" class="table-img"/>'
           }
         },
         {
-          label: this.$i18n.t('field.author'),
+          label: '作者',
           prop: 'author'
         },
         {
-          label: this.$i18n.t('field.recommend'),
+          label: '推荐',
           prop: 'recommend',
           component: row => {
             return row.recommend
@@ -109,7 +102,7 @@ export default {
           }
         },
         {
-          label: this.$i18n.t('field.top'),
+          label: '置顶',
           prop: 'top',
           component: row => {
             return row.top
@@ -118,7 +111,7 @@ export default {
           }
         },
         {
-          label: this.$i18n.t('field.status'),
+          label: '状态',
           prop: 'status',
           component: row => {
             return row.status
@@ -127,12 +120,12 @@ export default {
           }
         },
         {
-          label: this.$i18n.t('field.addtime'),
+          label: '添加时间',
           prop: 'addtime',
           width: 140
         },
         {
-          label: this.$i18n.t('field.updatetime'),
+          label: '修改时间',
           prop: 'updatetime',
           width: 140
         }
@@ -189,7 +182,7 @@ export default {
         .then(res => {
           this.List.splice(index, 1)
           this.$message({
-            message: this.$i18n.t('tips.delete_success'),
+            message: '删除成功',
             type: 'success'
           })
         })
@@ -197,7 +190,7 @@ export default {
     },
     handleDownload(index, row) {
       this.$message({
-        message: this.$i18n.t('tips.download_info') + row.id,
+        message: '当前下载行的id是' + row.id,
         type: 'success'
       })
     },
@@ -205,7 +198,7 @@ export default {
       let self = this
       if (this.selectionIdList.length == 0) {
         this.$message({
-          message: this.$i18n.t('tips.select_delete'),
+          message: '请选择要删除的数据',
           type: 'error'
         })
         return false
@@ -217,7 +210,7 @@ export default {
             item => this.selectionIdList.indexOf(item.id) == -1
           )
           this.$message({
-            message: this.$i18n.t('tips.delete_success'),
+            message: '删除成功',
             type: 'success',
             onClose: function() {
               self.getArticleLst()

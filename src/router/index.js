@@ -1,6 +1,5 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import i18n from '@/lang/i18n.js'
 Vue.use(Router)
 
 /* Layout */
@@ -63,7 +62,7 @@ export const constantRoutes = [
         name: 'Dashboard',
         component: () => import('@/views/dashboard/index'),
         meta: {
-          title: i18n.t('menu.dashboard'),
+          title: '控制台',
           icon: 'dashboard',
           affix: true
         }
@@ -79,7 +78,7 @@ export const constantRoutes = [
     alwaysShow: true,
     hidden: false,
     meta: {
-      title: i18n.t('menu.article'),
+      title: '文章管理',
       icon: 'table'
     },
     children: [
@@ -90,7 +89,7 @@ export const constantRoutes = [
         alwaysShow: false,
         hidden: false,
         meta: {
-          title: i18n.t('menu.article_list'),
+          title: '文章列表',
           icon: 'table'
         }
       },
@@ -101,7 +100,7 @@ export const constantRoutes = [
         hidden: true,
         component: () => import('@/views/article/article-add'),
         meta: {
-          title: i18n.t('menu.article_add')
+          title: '文章添加'
         }
       },
       {
@@ -111,7 +110,7 @@ export const constantRoutes = [
         hidden: true,
         component: () => import('@/views/article/article-edit'),
         meta: {
-          title: i18n.t('menu.article_edit')
+          title: '文章编辑'
         }
       }
     ]

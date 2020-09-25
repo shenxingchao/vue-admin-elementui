@@ -39,7 +39,7 @@ export default {
         matched = [
           {
             path: '/dashboard',
-            meta: { title: this.$i18n.t('menu.dashboard') }
+            meta: { title: '控制台' }
           }
         ].concat(matched)
       }

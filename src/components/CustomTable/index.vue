@@ -4,11 +4,11 @@
       <slot v-if="showSearch" name="searchBar"></slot>
       <el-dropdown v-if="showFilter" class="filter">
         <el-button type="primary" size="mini">
-          {{$t('opt.filter')}}<i class="el-icon-arrow-down el-icon--right"></i>
+          筛选<i class="el-icon-arrow-down el-icon--right"></i>
         </el-button>
         <el-dropdown-menu slot="dropdown">
           <el-checkbox v-model="checkAll" class="check-column-item" :indeterminate="isIndeterminate"
-                       @change="handleCheckAllChange">{{$t('opt.check_all')}}
+                       @change="handleCheckAllChange">全选
           </el-checkbox>
           <el-checkbox-group v-model="checkedColumn" @change="handleCheckedColumnChange">
             <div v-for="(item,index) in tableHead" :key="index">

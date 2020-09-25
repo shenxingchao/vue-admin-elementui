@@ -4,42 +4,42 @@
       <el-row type="flex" justify="left">
         <el-col :xs="24" :md="12">
           <el-form ref="ruleForm" :rules="rules" :model="ruleForm" label-position="right" label-width="150px">
-            <el-form-item :label="$t('field.title')" prop="title">
-              <el-input v-model="ruleForm.title" :placeholder="$t('field.title')" />
+            <el-form-item label="标题" prop="title">
+              <el-input v-model="ruleForm.title" placeholder="标题" />
             </el-form-item>
-            <el-form-item :label="$t('field.image')" prop="image">
+            <el-form-item label="图片" prop="image">
               <Upload :file="ruleForm.image" @handleUploadSuccess="handleUploadSuccess($event)"
                       @handleDeleteFile="ruleForm.image = ''">
               </Upload>
             </el-form-item>
-            <el-form-item :label="$t('field.image_list')" prop="image_list">
+            <el-form-item label="图片列表" prop="image_list">
               <Upload :files="ruleForm.image_list" multiple
                       @handleUploadMultipleSuccess="handleUploadMultipleSuccess($event)"
                       @handleClickDeleteMultiple="ruleForm.image_list = $event">
               </Upload>
             </el-form-item>
-            <el-form-item :label="$t('field.author')" prop="author">
-              <el-input v-model="ruleForm.author" :placeholder="$t('field.author')" />
+            <el-form-item label="作者" prop="author">
+              <el-input v-model="ruleForm.author" placeholder="作者" />
             </el-form-item>
-            <el-form-item :label="$t('field.detail')" prop="detail">
+            <el-form-item label="详情" prop="detail">
               <QuillEditor :url="serverUrl" :header="header" :value="ruleForm.detail" @input="input($event)">
               </QuillEditor>
             </el-form-item>
-            <el-form-item :label="$t('field.recommend')" prop="recommend">
+            <el-form-item label="推荐" prop="recommend">
               <el-switch v-model="ruleForm.recommend" active-color="#13ce66" inactive-color="#ff4949">
               </el-switch>
             </el-form-item>
-            <el-form-item :label="$t('field.top')" prop="top">
+            <el-form-item label="置顶" prop="top">
               <el-switch v-model="ruleForm.top" active-color="#13ce66" inactive-color="#ff4949">
               </el-switch>
             </el-form-item>
-            <el-form-item :label="$t('field.status')" prop="">
+            <el-form-item label="状态" prop="">
               <el-switch v-model="ruleForm.status" active-color="#13ce66" inactive-color="#ff4949">
               </el-switch>
             </el-form-item>
             <el-form-item>
-              <el-button type="success" @click="submitForm('ruleForm')">{{$t('opt.save')}}</el-button>
-              <el-button @click="resetForm('ruleForm')">{{$t('opt.reset')}}</el-button>
+              <el-button type="success" @click="submitForm('ruleForm')">确定</el-button>
+              <el-button @click="resetForm('ruleForm')">重置</el-button>
             </el-form-item>
           </el-form>
         </el-col>
@@ -79,34 +79,33 @@ export default {
         title: [
           {
             required: true,
-            message: this.$i18n.t('tips.input') + this.$i18n.t('field.title'),
+            message: '请输入标题',
             trigger: 'blur'
           }
         ],
         image: [
           {
             required: true,
-            message: this.$i18n.t('tips.upload') + this.$i18n.t('field.image')
+            message: '请上传图片'
           }
         ],
         image_list: [
           {
             required: true,
-            message:
-              this.$i18n.t('tips.upload') + this.$i18n.t('field.image_list')
+            message: '请上传图片列表'
           }
         ],
         author: [
           {
             required: true,
-            message: this.$i18n.t('tips.input') + this.$i18n.t('field.author'),
+            message: '请输入作者',
             trigger: 'blur'
           }
         ],
         detail: [
           {
             required: true,
-            message: this.$i18n.t('tips.input') + this.$i18n.t('field.detail')
+            message: '请输入详情'
           }
         ]
       },
@@ -134,7 +133,7 @@ export default {
           articleEdit(this.ruleForm)
             .then(res => {
               this.$message({
-                message: this.$i18n.t('tips.edit_success'),
+                message: '编辑成功',
                 type: 'success',
                 onClose: function() {
                   _this.$router.push('/article/article-list')
