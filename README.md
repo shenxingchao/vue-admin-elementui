@@ -105,6 +105,9 @@ import Upload from '@/components/Upload'
 <Upload :file="ruleForm.avatar" @handleUploadSuccess="handleUploadSuccess($event)"
         @handleDeleteFile="ruleForm.avatar = ''">
 </Upload>
+```
+##### 单图上传
+```javascript
 <script>
 //上传成功事件
 handleUploadSuccess: function(imgUrl) {
@@ -120,6 +123,8 @@ handleUploadSuccess: function(imgUrl) {
         @handleUploadMultipleSuccess="handleUploadMultipleSuccess($event)"
         @handleClickDeleteMultiple="ruleForm.image_list = $event">
 </Upload>
+```
+```javascript
 <script>
 //多图上传成功事件
 handleUploadMultipleSuccess: function(imgUrlList) {
@@ -133,13 +138,21 @@ handleUploadMultipleSuccess: function(imgUrlList) {
 
 ##### 流程
 
-1.用户进入dashbord页面
-2./src/permission.js 利用router.beforeEach实现路由拦截； 判断vuex 是否已经存储了roles 角色信息，没有则调用/src/store/modules/user.js getInfo action获取用户信息来获取用户角色并设置store state roles，mock.js拦截获取用户信息 返回角色id数组 roles[1,2,3]
-3./src/permission.js 调用/src/store/modules/permission.js generateRoutes action动态生成路由并返回
-4.generateRoutes action 里面调起getPermissionRouter 获取后端对应角色的权限路由数组，moke.js 拦截获取路由数组 详解/src/moke.js 数据结构
-5.通过routerMapComponet根据返回的路由数组进行路由映射 将结果asyncRouterMapRes  resolve返回
-6.回到/src/permission.js 设置路由配置router.options.routes = store.getters.addRoutes  菜单组件中用的是这个来循环菜单的（注意）
-7.通过router.addRoutes(asyncRouterMapRes) 方法将获取到的动态路由添加到当前路由
-8.结束流程
+- 用户进入dashbord页面
+
+- /src/permission.js 利用router.beforeEach实现路由拦截； 判断vuex 是否已经存储了roles 角色信息，没有则调用/src/store/modules/user.js 
+getInfo action获取用户信息来获取用户角色并设置store state roles，mock.js拦截获取用户信息 返回角色id数组 roles[1,2,3]
+
+- /src/permission.js 调用/src/store/modules/permission.js generateRoutes action动态生成路由并返回
+
+- generateRoutes action 里面调起getPermissionRouter 获取后端对应角色的权限路由数组，moke.js 拦截获取路由数组 详解/src/moke.js 数据结构
+
+- 通过routerMapComponet根据返回的路由数组进行路由映射 将结果asyncRouterMapRes  resolve返回
+
+- 回到/src/permission.js 设置路由配置router.options.routes = store.getters.addRoutes  菜单组件中用的是这个来循环菜单的（注意）
+
+- 通过router.addRoutes(asyncRouterMapRes) 方法将获取到的动态路由添加到当前路由
+
+- 结束流程
 
 ### 后续 1.dashborad 页面 2.美化登录界面 3.美化菜单栏
