@@ -128,4 +128,4 @@ handleUploadMultipleSuccess: function(imgUrlList) {
 </script>
 ```
 
-### 后续 1.添加菜单搜索组件 2.模拟后端返回路由表形成动态路由 3.dashborad 页面
+### 后续 1.dashborad 页面
