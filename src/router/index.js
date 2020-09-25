@@ -56,7 +56,16 @@ export const constantRoutes = [
 const createRouter = () =>
   new Router({
     // mode: 'history', // require service support
-    scrollBehavior: () => ({ y: 0 }),
+    // 解决vue框架页面跳转有白色不可追踪色块的bug
+    scrollBehavior(to, from, savedPosition) {
+      if (savedPosition) {
+        //浏览器前进后端 保存滚动条位置
+        return savedPosition
+      } else {
+        // 如果不是通过上述行为切换组件，就会让页面回到顶部
+        return { x: 0, y: 0 }
+      }
+    },
     routes: constantRoutes
   })
 
