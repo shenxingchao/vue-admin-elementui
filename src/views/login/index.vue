@@ -1,7 +1,13 @@
 <template>
   <div class="login-container">
-    <el-form ref="loginForm" :model="loginForm" :rules="loginRules" class="login-form" auto-complete="on"
-             label-position="left">
+    <el-form
+      ref="loginForm"
+      :model="loginForm"
+      :rules="loginRules"
+      class="login-form"
+      auto-complete="on"
+      label-position="left"
+    >
       <div class="title-container">
         <h3 class="title">后台管理系统</h3>
       </div>
@@ -9,24 +15,47 @@
         <span class="svg-container">
           <svg-icon icon-class="user" />
         </span>
-        <el-input ref="username" v-model="loginForm.username" placeholder="用户名" name="username" type="text" tabindex="1"
-                  auto-complete="on" />
+        <el-input
+          ref="username"
+          v-model="loginForm.username"
+          placeholder="用户名"
+          name="username"
+          type="text"
+          tabindex="1"
+          auto-complete="on"
+        />
       </el-form-item>
       <el-form-item prop="password">
         <span class="svg-container">
           <svg-icon icon-class="password" />
         </span>
-        <el-input :key="passwordType" ref="password" v-model="loginForm.password" :type="passwordType" placeholder="密码"
-                  name="password" tabindex="2" auto-complete="on" @keyup.enter.native="handleLogin" />
+        <el-input
+          :key="passwordType"
+          ref="password"
+          v-model="loginForm.password"
+          :type="passwordType"
+          placeholder="密码"
+          name="password"
+          tabindex="2"
+          auto-complete="on"
+          @keyup.enter.native="handleLogin"
+        />
         <span class="show-pwd" @click="showPwd">
-          <svg-icon :icon-class="passwordType === 'password' ? 'eye' : 'eye-open'" />
+          <svg-icon
+            :icon-class="passwordType === 'password' ? 'eye' : 'eye-open'"
+          />
         </span>
       </el-form-item>
-      <el-button :loading="loading" type="primary" style="width:100%;margin-bottom:30px;"
-                 @click.native.prevent="handleLogin">登录</el-button>
+      <el-button
+        :loading="loading"
+        type="primary"
+        style="width:100%;margin-bottom:30px;"
+        @click.native.prevent="handleLogin"
+        >登录</el-button
+      >
     </el-form>
   </div>
-</template> 
+</template>
 
 <script>
 export default {
@@ -35,27 +64,27 @@ export default {
     return {
       loginForm: {
         username: '',
-        password: ''
+        password: '',
       },
       loginRules: {
         username: [
           {
             required: true,
             trigger: 'blur',
-            message: '请输入用户名'
-          }
+            message: '请输入用户名',
+          },
         ],
         password: [
           {
             required: true,
             trigger: 'blur',
-            message: '请输入密码'
-          }
-        ]
+            message: '请输入密码',
+          },
+        ],
       },
       loading: false,
       passwordType: 'password',
-      redirect: undefined
+      redirect: undefined,
     }
   },
   watch: {
@@ -63,8 +92,8 @@ export default {
       handler: function(route) {
         this.redirect = route.query && route.query.redirect
       },
-      immediate: true
-    }
+      immediate: true,
+    },
   },
   methods: {
     showPwd() {
@@ -78,7 +107,7 @@ export default {
       })
     },
     handleLogin() {
-      this.$refs.loginForm.validate(valid => {
+      this.$refs.loginForm.validate((valid) => {
         if (valid) {
           this.loading = true
           this.$store
@@ -95,8 +124,8 @@ export default {
           return false
         }
       })
-    }
-  }
+    },
+  },
 }
 </script>
 
@@ -146,7 +175,7 @@ $cursor: $theme;
 }
 </style>
 <style lang="scss" scoped>
-$bg: #2d3a4b;
+$bg: $deep-theme;
 $dark_gray: #889aa4;
 
 .login-container {
@@ -167,7 +196,6 @@ $dark_gray: #889aa4;
     right: 0;
     bottom: 0;
     margin: auto;
-    background: rgba($color: $bg, $alpha: 1);
     z-index: 1;
   }
   .login-form {
@@ -175,12 +203,15 @@ $dark_gray: #889aa4;
     position: relative;
     width: 440px;
     max-width: 100%;
-    padding: 160px 35px 0;
-    margin: 0 auto;
+    padding: 30px 35px 0;
+    margin: 100px auto;
     overflow: hidden;
+    background: #ffffff;
+    border-radius: 20px;
   }
   .el-form-item {
     background: #ffffff;
+    border: 1px solid #cccccc;
   }
 
   .svg-container {
@@ -199,7 +230,7 @@ $dark_gray: #889aa4;
 
     .title {
       font-size: 26px;
-      color: #ffffff;
+      color: $h1c;
       margin: 0px auto 40px auto;
       text-align: center;
       font-weight: bold;
