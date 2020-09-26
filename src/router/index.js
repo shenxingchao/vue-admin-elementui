@@ -33,7 +33,7 @@ export const constantRoutes = [
   {
     path: '/login',
     component: () => import('@/views/login/index'),
-    hidden: true
+    hidden: true,
   },
   {
     path: '/redirect',
@@ -42,15 +42,15 @@ export const constantRoutes = [
     children: [
       {
         path: '/redirect/:path(.*)',
-        component: () => import('@/views/redirect/index')
-      }
-    ]
+        component: () => import('@/views/redirect/index'),
+      },
+    ],
   },
   {
     path: '/404',
     component: () => import('@/views/404'),
-    hidden: true
-  }
+    hidden: true,
+  },
 ]
 
 const createRouter = () =>
@@ -66,7 +66,7 @@ const createRouter = () =>
         return { x: 0, y: 0 }
       }
     },
-    routes: constantRoutes
+    routes: constantRoutes,
   })
 
 const router = createRouter()

@@ -35,8 +35,8 @@ let login = Mock.mock({
   message: 'success',
   code: 20000,
   data: {
-    token: '@word(32)'
-  }
+    token: '@word(32)',
+  },
 })
 Mock.mock(/User\/login/, 'post', () => {
   return login
@@ -50,8 +50,8 @@ let getUserInfo = Mock.mock({
     username: '@cword(5)',
     avatar:
       'https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif',
-    roles: [1, 2, 3] //模拟返回角色id 1，2，3
-  }
+    roles: [1, 2, 3], //模拟返回角色id 1，2，3
+  },
 })
 Mock.mock(/UserCenter\/getInfo/, 'get', () => {
   return getUserInfo
@@ -61,7 +61,7 @@ Mock.mock(/UserCenter\/getInfo/, 'get', () => {
 let logout = Mock.mock({
   message: 'success',
   code: 20000,
-  data: {}
+  data: {},
 })
 Mock.mock(/UserCenter\/logout/, 'post', () => {
   return logout
@@ -84,10 +84,10 @@ let getPermissionRouter = Mock.mock({
           meta: {
             title: '控制台',
             icon: 'dashboard',
-            affix: true
-          }
-        }
-      ]
+            affix: true,
+          },
+        },
+      ],
     },
     {
       path: '/article',
@@ -99,7 +99,7 @@ let getPermissionRouter = Mock.mock({
       hidden: false,
       meta: {
         title: '文章管理',
-        icon: 'table'
+        icon: 'table',
       },
       children: [
         {
@@ -110,8 +110,8 @@ let getPermissionRouter = Mock.mock({
           hidden: false,
           meta: {
             title: '文章列表',
-            icon: 'table'
-          }
+            icon: 'table',
+          },
         },
         {
           path: 'article-add',
@@ -120,8 +120,8 @@ let getPermissionRouter = Mock.mock({
           hidden: true,
           component: 'ArticleAdd',
           meta: {
-            title: '文章添加'
-          }
+            title: '文章添加',
+          },
         },
         {
           path: 'article-edit',
@@ -130,12 +130,12 @@ let getPermissionRouter = Mock.mock({
           hidden: true,
           component: 'ArticleEdit',
           meta: {
-            title: '文章编辑'
-          }
-        }
-      ]
-    }
-  ]
+            title: '文章编辑',
+          },
+        },
+      ],
+    },
+  ],
 })
 Mock.mock(/UserCenter\/getPermissionRouter/, 'post', () => {
   return getPermissionRouter
@@ -147,8 +147,8 @@ let fileUpload = Mock.mock({
   code: 20000,
   data: {
     imgUrl:
-      'https://iph.href.lu/400x300?text=%E4%B8%8A%E4%BC%A0%E8%BF%94%E5%9B%9E%E7%9A%84%E5%9B%BE%E7%89%87&fg=ffffff&bg=2986cc'
-  }
+      'https://iph.href.lu/400x300?text=%E4%B8%8A%E4%BC%A0%E8%BF%94%E5%9B%9E%E7%9A%84%E5%9B%BE%E7%89%87&fg=ffffff&bg=2986cc',
+  },
 })
 Mock.mock(/Upload\/fileUpload/, 'post', () => {
   return fileUpload
@@ -172,10 +172,10 @@ let articleLst = Mock.mock({
         top: false,
         status: true,
         addtime: '@datetime("yyyy-MM-dd HH:mm:ss")',
-        updatetime: '@datetime("yyyy-MM-dd HH:mm:ss")'
-      }
-    ]
-  }
+        updatetime: '@datetime("yyyy-MM-dd HH:mm:ss")',
+      },
+    ],
+  },
 })
 Mock.mock(/Article\/articleLst/, 'get', () => {
   return articleLst
@@ -185,7 +185,7 @@ Mock.mock(/Article\/articleLst/, 'get', () => {
 let articleDelete = Mock.mock({
   message: 'success',
   code: 20000,
-  data: {}
+  data: {},
 })
 Mock.mock(/Article\/articleDelete/, 'post', () => {
   return articleDelete
@@ -195,7 +195,7 @@ Mock.mock(/Article\/articleDelete/, 'post', () => {
 let articleAdd = Mock.mock({
   message: 'success',
   code: 20000,
-  data: {}
+  data: {},
 })
 Mock.mock(/Article\/articleAdd/, 'post', () => {
   return articleAdd
@@ -213,7 +213,7 @@ let articleDetail = Mock.mock({
     image_list: [
       'https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif',
       'https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif',
-      'https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif'
+      'https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif',
     ],
     detail: '@cparagraph()',
     author: '@cname()',
@@ -221,8 +221,8 @@ let articleDetail = Mock.mock({
     top: true,
     status: true,
     addtime: '@datetime("yyyy-MM-dd HH:mm:ss")',
-    updatetime: '@datetime("yyyy-MM-dd HH:mm:ss")'
-  }
+    updatetime: '@datetime("yyyy-MM-dd HH:mm:ss")',
+  },
 })
 Mock.mock(/Article\/articleDetail/, 'get', () => {
   return articleDetail
@@ -232,7 +232,7 @@ Mock.mock(/Article\/articleDetail/, 'get', () => {
 let articleEdit = Mock.mock({
   message: 'success',
   code: 20000,
-  data: {}
+  data: {},
 })
 Mock.mock(/Article\/articleEdit/, 'post', () => {
   return articleEdit

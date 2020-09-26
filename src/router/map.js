@@ -9,6 +9,6 @@ export const map = {
   Article: () => Layout, //文章管理
   ArticleList: () => import('@/views/article/article-list'), // 文章列表
   ArticleAdd: () => import('@/views/article/article-add'), // 文章添加
-  ArticleEdit: () => import('@/views/article/article-edit') // 文章编辑
+  ArticleEdit: () => import('@/views/article/article-edit'), // 文章编辑
 }
 export default map
