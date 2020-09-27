@@ -26,26 +26,26 @@ function routerMapComponet(asyncRouterMap) {
 
 const state = {
   routes: [],
-  addRoutes: [],
+  addRoutes: []
 }
 
 const mutations = {
   SET_ROUTES: (state, routes) => {
     state.addRoutes = routes
     state.routes = constantRoutes.concat(routes)
-  },
+  }
 }
 
 const actions = {
   generateRoutes({ commit }, roles) {
-    return new Promise((resolve) => {
+    return new Promise(resolve => {
       let asyncRouterMap
       asyncRouterMap = []
-      getPermissionRouter({ roles: roles }).then((res) => {
+      getPermissionRouter({ roles: roles }).then(res => {
         asyncRouterMap = res.data.concat({
           path: '*',
           redirect: '/404',
-          hidden: true,
+          hidden: true
         }) //404 must be put end
         // 组建映射
         const asyncRouterMapRes = routerMapComponet(asyncRouterMap)
@@ -53,12 +53,12 @@ const actions = {
         resolve(asyncRouterMapRes)
       })
     })
-  },
+  }
 }
 
 export default {
   namespaced: true,
   state,
   mutations,
-  actions,
+  actions
 }

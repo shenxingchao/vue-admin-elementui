@@ -5,6 +5,6 @@ export function fileUpload(ruleForm) {
     url: '/Upload/fileUpload',
     method: 'post',
     headers: { 'Content-Type': 'multipart/form-data' },
-    data: ruleForm,
+    data: ruleForm
   })
 }
