@@ -1,4 +1,4 @@
-# vue-admin-elementui
+# vue-admin-elementui mockjs async-router elementui i18n custom-table custom-theme curd-demo
 
 为了简单而生
 
@@ -44,7 +44,8 @@ $theme: #50bf8d;
 ### 2.国际化
 
 ##### /src/lang/i18n.js
-##### 请切换到i18n分支,前端路由权限实现方式，后端维护一个菜单表和前端路由结构一致，返回每个菜单对应的id，前端路由表也存这个id，然后通过递归前端路由数组，判断id返回一个新的路由数组动态添加进路由当中即可，这种情况的多语言是维护在前端的，如果后端维护菜单名称多语言，那么和master分支权限实现方式无异
+
+##### 请切换到 i18n 分支,前端路由权限实现方式，后端维护一个菜单表和前端路由结构一致，返回每个菜单对应的 id，前端路由表也存这个 id，然后通过递归前端路由数组，判断 id 返回一个新的路由数组动态添加进路由当中即可，这种情况的多语言是维护在前端的，如果后端维护菜单名称多语言，那么和 master 分支权限实现方式无异
 
 默认中英文二种
 其他语言按格式增加即可
@@ -58,7 +59,7 @@ $theme: #50bf8d;
   export default {
     mounted() {
       this.$i18n.t('hello')
-    },
+    }
   }
 </script>
 ```
@@ -88,25 +89,31 @@ $--font-path: '~element-ui/lib/theme-chalk/fonts';
 请求拦截，模拟返回数据
 mockjs 在线编辑器 http://mockjs.com/0.1/editor.html#help
 
-### 5.增删改查demo
+### 5.增删改查 demo
 
 ##### /src/views/article/...vue
 
 ### 6.多图上传组件
 
-
 ##### 引入
+
 ```javascript
 import Upload from '@/components/Upload'
 ```
 
-##### 
+#####
+
 ```html
-<Upload :file="ruleForm.avatar" @handleUploadSuccess="handleUploadSuccess($event)"
-        @handleDeleteFile="ruleForm.avatar = ''">
+<Upload
+  :file="ruleForm.avatar"
+  @handleUploadSuccess="handleUploadSuccess($event)"
+  @handleDeleteFile="ruleForm.avatar = ''"
+>
 </Upload>
 ```
+
 ##### 单图上传
+
 ```javascript
 <script>
 //上传成功事件
@@ -117,13 +124,19 @@ handleUploadSuccess: function(imgUrl) {
 }
 </script>
 ```
+
 ##### 多图上传
+
 ```html
-<Upload :files="ruleForm.image_list" multiple
-        @handleUploadMultipleSuccess="handleUploadMultipleSuccess($event)"
-        @handleClickDeleteMultiple="ruleForm.image_list = $event">
+<Upload
+  :files="ruleForm.image_list"
+  multiple
+  @handleUploadMultipleSuccess="handleUploadMultipleSuccess($event)"
+  @handleClickDeleteMultiple="ruleForm.image_list = $event"
+>
 </Upload>
 ```
+
 ```javascript
 <script>
 //多图上传成功事件
@@ -138,21 +151,21 @@ handleUploadMultipleSuccess: function(imgUrlList) {
 
 ##### 流程
 
-- 用户进入dashbord页面
+- 用户进入 dashbord 页面
 
-- /src/permission.js 利用router.beforeEach实现路由拦截； 判断vuex 是否已经存储了roles 角色信息，没有则调用/src/store/modules/user.js 
-getInfo action获取用户信息来获取用户角色并设置store state roles，mock.js拦截获取用户信息 返回角色id数组 roles[1,2,3]
+- /src/permission.js 利用 router.beforeEach 实现路由拦截； 判断 vuex 是否已经存储了 roles 角色信息，没有则调用/src/store/modules/user.js
+  getInfo action 获取用户信息来获取用户角色并设置 store state roles，mock.js 拦截获取用户信息 返回角色 id 数组 roles[1,2,3]
 
-- /src/permission.js 调用/src/store/modules/permission.js generateRoutes action动态生成路由并返回
+- /src/permission.js 调用/src/store/modules/permission.js generateRoutes action 动态生成路由并返回
 
-- generateRoutes action 里面调起getPermissionRouter 获取后端对应角色的权限路由数组，moke.js 拦截获取路由数组 详解/src/moke.js 数据结构
+- generateRoutes action 里面调起 getPermissionRouter 获取后端对应角色的权限路由数组，moke.js 拦截获取路由数组 详解/src/moke.js 数据结构
 
-- 通过routerMapComponet根据返回的路由数组进行路由映射 将结果asyncRouterMapRes  resolve返回
+- 通过 routerMapComponet 根据返回的路由数组进行路由映射 将结果 asyncRouterMapRes resolve 返回
 
-- 回到/src/permission.js 设置路由配置router.options.routes = store.getters.addRoutes  菜单组件中用的是这个来循环菜单的（注意）
+- 回到/src/permission.js 设置路由配置 router.options.routes = store.getters.addRoutes 菜单组件中用的是这个来循环菜单的（注意）
 
-- 通过router.addRoutes(asyncRouterMapRes) 方法将获取到的动态路由添加到当前路由
+- 通过 router.addRoutes(asyncRouterMapRes) 方法将获取到的动态路由添加到当前路由
 
 - 结束流程
 
-### 后续 1.dashborad 页面 2.美化登录界面 3.美化菜单栏
+### 后续 1.dashborad 页面
