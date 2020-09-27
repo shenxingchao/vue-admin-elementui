@@ -175,7 +175,7 @@ $dark_gray: #889aa4;
     width: 440px;
     max-width: 100%;
     padding: 30px 35px 0;
-    margin: 100px auto;
+    margin: 20vh auto 0;
     overflow: hidden;
     background: #ffffff;
     border-radius: 20px;
