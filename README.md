@@ -1,6 +1,6 @@
 # vue-admin-elementui mockjs async-router elementui i18n custom-table custom-theme curd-demo
 
-为了简单而生
+目前有以下这些 mockjs 数据拦截 异步路由 elementui 国际化 自定义表格组件 自定义主题色 增删改查 demo
 
 [在线预览](https://shenxingchao.github.io/vue-admin-elementui)
 
