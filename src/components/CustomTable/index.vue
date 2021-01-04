@@ -20,7 +20,8 @@
     </div>
     <el-table :id="id" :key="key" ref="multipleTable" :data="data" :row-key="hanldeRowKey" border fit default-expand-all
               size="mini" tooltip-effect="dark" style="width: 100%" @header-dragend="handleHeaderDrag"
-              @row-click="handleRowClick" @selection-change="handleSelectionChange" @row-dblclick="handleRowDblClick">
+              @row-click="handleRowClick" @select="handleSelect" @select-all="handleSelectAll"
+              @selection-change="handleSelectionChange" @row-dblclick="handleRowDblClick">
       <!-- 多选框checkbox -->
       <el-table-column v-if="showSelection" type="selection" width="55">
       </el-table-column>
@@ -132,7 +133,7 @@ export default {
     return {
       key: 0, //table的key
       tableHeadOptions: {}, //实际显示的tableHead
-      selectionList: [], //选中行的id数组 1,2,3,4...
+      selectionId: null, //当前选中id临时变量
       checkAll: true, //全选
       checkedColumn: [], //字段筛选列表
       isIndeterminate: false, //全选按钮 样式  - 或者是 √
@@ -170,23 +171,66 @@ export default {
     },
     //单击一行 选中
     handleRowClick(row) {
-      let multipleTable = this.$refs.multipleTable
-      multipleTable.toggleRowSelection(row)
+      if (this.isRadio) {
+        //单选
+        this.$refs.multipleTable.clearSelection()
+        if (row) {
+          //如果选中了行
+          if (row.id == this.selectionId) {
+            //如果选中的还是上一行
+            this.selectionId = ''
+            this.$emit('handleSelectionChange', null)
+            this.$refs.multipleTable.toggleRowSelection(row, false)
+          } else {
+            //如果是其他行
+            this.selectionId = row.id
+            this.$emit('handleSelectionChange', row.id)
+            this.$refs.multipleTable.toggleRowSelection(row, true)
+          }
+        } else {
+          //如果没有选中
+          this.selectionId = ''
+          this.$emit('handleSelectionChange', null)
+          this.$refs.multipleTable.toggleRowSelection(row, true)
+        }
+      } else {
+        //多选
+        let multipleTable = this.$refs.multipleTable
+        multipleTable.toggleRowSelection(row)
+      }
+    },
+    //选择
+    handleSelect(selection, row) {
+      if (this.isRadio) {
+        // 清除所有选中
+        this.$refs.multipleTable.clearSelection()
+        if (selection.length === 0) {
+          this.$emit('handleSelectionChange', null)
+          return
+        }
+        // 将当前点击项选中
+        this.$refs.multipleTable.toggleRowSelection(row, true)
+        if (row) {
+          this.$emit('handleSelectionChange', row.id)
+        }
+      }
+    },
+    //全选
+    handleSelectAll(selection, row) {
+      if (this.isRadio) {
+        this.$refs.multipleTable.clearSelection()
+        console.log('null')
+      }
     },
     //选中行状态改变
     handleSelectionChange(rows) {
       if (!this.isRadio) {
+        //多选
         let selectionIdList = []
         rows.forEach((element) => {
           selectionIdList.push(element.id)
         })
         this.$emit('handleSelectionChange', selectionIdList)
-      } else {
-        if (rows.length > 1) {
-          this.$refs.multipleTable.clearSelection()
-          this.$refs.multipleTable.toggleRowSelection(rows[1])
-        }
-        this.$emit('handleSelectionChange', rows[0] ? rows[0].id : null)
       }
     },
     //双击打开编辑
