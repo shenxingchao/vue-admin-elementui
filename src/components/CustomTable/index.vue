@@ -18,9 +18,9 @@
         </el-dropdown-menu>
       </el-dropdown>
     </div>
-    <el-table :id="id" :key="key" ref="multipleTable" :data="data" :row-key="hanldeRowKey" border fit size="mini"
-              tooltip-effect="dark" style="width: 100%" @header-dragend="handleHeaderDrag" @row-click="handleRowClick"
-              @selection-change="handleSelectionChange" @row-dblclick="handleRowDblClick">
+    <el-table :id="id" :key="key" ref="multipleTable" :data="data" :row-key="hanldeRowKey" border fit default-expand-all
+              size="mini" tooltip-effect="dark" style="width: 100%" @header-dragend="handleHeaderDrag"
+              @row-click="handleRowClick" @selection-change="handleSelectionChange" @row-dblclick="handleRowDblClick">
       <!-- 多选框checkbox -->
       <el-table-column v-if="showSelection" type="selection" width="55">
       </el-table-column>
@@ -65,63 +65,68 @@ export default {
   name: 'CustomTable',
   components: {
     CustomTag,
-    Sortable
+    Sortable,
   },
   props: {
     //表格id
     id: {
       type: String,
-      default: ''
+      default: '',
     },
-    //显示单选框
+    //显示多选框
     showSelection: {
       type: Boolean,
-      default: true
+      default: true,
+    },
+    //多选框是否为单选
+    isRadio: {
+      type: Boolean,
+      default: false,
     },
     //表头数据
     tableHead: {
       type: Array,
       default: () => {
         return []
-      }
+      },
     },
     //表格数据
     data: {
       type: Array,
       default: () => {
         return []
-      }
+      },
     },
     //显示分页
     showPage: {
       type: Boolean,
-      default: true
+      default: true,
     },
     //分页参数
     params: {
       type: Object,
-      default: null
+      default: null,
     },
     //显示筛选
     showFilter: {
       type: Boolean,
-      default: true
+      default: true,
     },
     //显示搜索
     showSearch: {
       type: Boolean,
-      default: true
+      default: true,
     },
     //显示操作
     showOpt: {
       type: Boolean,
-      default: true
+      default: true,
     },
     //操作列最小宽度
     optWidth: {
       type: Number,
-      default: 120
-    }
+      default: 120,
+    },
   },
   data() {
     return {
@@ -130,22 +135,22 @@ export default {
       selectionList: [], //选中行的id数组 1,2,3,4...
       checkAll: true, //全选
       checkedColumn: [], //字段筛选列表
-      isIndeterminate: false //全选按钮 样式  - 或者是 √
+      isIndeterminate: false, //全选按钮 样式  - 或者是 √
     }
   },
   watch: {
     checkedColumn(val) {
-      this.tableHeadOptions = this.tableHead.filter(i => {
+      this.tableHeadOptions = this.tableHead.filter((i) => {
         return val.indexOf(i.label) >= 0
       })
       this.key += 1 //fix 抖动 bug
       setTimeout(() => {
         this.rowDrop() //每次重绘表格在执行拖动
       }, 100)
-    }
+    },
   },
   mounted() {
-    this.tableHead.forEach(element => {
+    this.tableHead.forEach((element) => {
       this.checkedColumn.push(element.label)
     })
     this.getTableColWidth()
@@ -169,12 +174,20 @@ export default {
       multipleTable.toggleRowSelection(row)
     },
     //选中行状态改变
-    handleSelectionChange(val) {
-      let selectionIdList = []
-      val.forEach(element => {
-        selectionIdList.push(element.id)
-      })
-      this.$emit('handleSelectionChange', selectionIdList)
+    handleSelectionChange(rows) {
+      if (!this.isRadio) {
+        let selectionIdList = []
+        rows.forEach((element) => {
+          selectionIdList.push(element.id)
+        })
+        this.$emit('handleSelectionChange', selectionIdList)
+      } else {
+        if (rows.length > 1) {
+          this.$refs.multipleTable.clearSelection()
+          this.$refs.multipleTable.toggleRowSelection(rows[1])
+        }
+        this.$emit('handleSelectionChange', rows[0] ? rows[0].id : null)
+      }
     },
     //双击打开编辑
     handleRowDblClick(val) {
@@ -226,14 +239,14 @@ export default {
           const currRow = _this.data.splice(oldIndex, 1)[0]
           _this.data.splice(newIndex, 0, currRow)
           _this.$emit('handleRowRrop', _this.data) //当前页新的排序数据
-        }
+        },
       })
     },
     //全选
     handleCheckAllChange(val) {
       this.checkedColumn = []
       if (val) {
-        this.tableHead.forEach(element => {
+        this.tableHead.forEach((element) => {
           this.checkedColumn.push(element.label)
         })
       }
@@ -245,8 +258,8 @@ export default {
       this.checkAll = checkedCount === this.tableHead.length
       this.isIndeterminate =
         checkedCount > 0 && checkedCount < this.tableHead.length
-    }
-  }
+    },
+  },
 }
 </script>
 
