@@ -7,7 +7,7 @@
           筛选<i class="el-icon-arrow-down el-icon--right"></i>
         </el-button>
         <el-dropdown-menu slot="dropdown">
-          <div>
+          <div class="clear-btn-box">
             <el-button size="mini" icon="el-icon-refresh" type="primary" @click="handleClickClearCache">
               清除缓存
             </el-button>
@@ -357,5 +357,11 @@ export default {
 }
 .check-column-item {
   padding: 4px 8px;
+}
+
+.el-dropdown-menu {
+  .clear-btn-box {
+    padding: 0 10px;
+  }
 }
 </style>
