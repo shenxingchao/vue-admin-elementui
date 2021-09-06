@@ -167,5 +167,3 @@ handleUploadMultipleSuccess: function(imgUrlList) {
 - 通过 router.addRoutes(asyncRouterMapRes) 方法将获取到的动态路由添加到当前路由
 
 - 结束流程
-
-### 后续 1.dashborad 页面
